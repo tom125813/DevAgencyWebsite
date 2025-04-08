@@ -25,17 +25,15 @@
             font-family: 'Inter', sans-serif;
         }
 
-        body.light-mode {
-            background: #f8f9fa;
-            color: #1a1a1a;
+        /* Prevent scrolling when mobile nav is open */
+        body.nav-open {
+            overflow: hidden;
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
         ::-webkit-scrollbar-thumb { background: #00ff88; border-radius: 4px; }
-        body.light-mode ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.05); }
-        body.light-mode ::-webkit-scrollbar-thumb { background: #007bff; }
 
         /* Animations */
         @keyframes fadeIn {
@@ -54,16 +52,21 @@
             60% { transform: translateY(-5px); }
         }
 
-        body.light-mode [style*="text-shadow"] {
-            text-shadow: 0 0 5px rgba(0, 123, 255, 0.5) !important;
+        @keyframes slideIn {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
         }
 
-        body.light-mode [style*="text-shadow"]:hover {
-            text-shadow: 0 0 15px rgba(0, 123, 255, 0.8) !important;
+        @keyframes slideOut {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100%); }
         }
 
         .fade-in {
             opacity: 0;
+        }
+
+        .fade-in.visible {
             animation: fadeIn 0.8s ease forwards;
         }
 
@@ -83,10 +86,6 @@
             transition: opacity 0.5s ease;
         }
 
-        body.light-mode .loader {
-            background: #f8f9fa;
-        }
-
         .loader.hidden {
             opacity: 0;
             pointer-events: none;
@@ -103,10 +102,6 @@
             animation: codeGlow 2s infinite;
         }
 
-        body.light-mode .loader-text h1 {
-            color: #007bff;
-        }
-
         .loader-text p {
             font-size: 18px;
             opacity: 0.7;
@@ -119,11 +114,6 @@
             border-top: 5px solid #00ff88;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-        }
-
-        body.light-mode .spinner {
-            border: 5px solid rgba(0, 123, 255, 0.2);
-            border-top: 5px solid #007bff;
         }
 
         @keyframes spin {
@@ -146,11 +136,6 @@
             z-index: 1000;
         }
 
-        body.light-mode .navbar {
-            background: rgba(248, 249, 250, 0.9);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
         .logo {
             font-family: 'Space Mono', monospace;
             font-size: 32px;
@@ -159,13 +144,11 @@
             animation: codeGlow 2s infinite;
         }
 
-        body.light-mode .logo {
-            color: #007bff;
-        }
-
         .nav-links {
             display: flex;
             gap: 30px;
+            flex-grow: 1;
+            justify-content: center;
         }
 
         .nav-links a {
@@ -177,17 +160,9 @@
             transition: color 0.3s, transform 0.3s;
         }
 
-        body.light-mode .nav-links a {
-            color: #1a1a1a;
-        }
-
         .nav-links a:hover {
             color: #00ff88;
             transform: translateY(-2px);
-        }
-
-        body.light-mode .nav-links a:hover {
-            color: #007bff;
         }
 
         .nav-links a.active {
@@ -195,77 +170,61 @@
             border-bottom: 2px solid #00ff88;
         }
 
-        body.light-mode .nav-links a.active {
-            color: #007bff;
-            border-bottom: 2px solid #007bff;
-        }
-
-        .nav-toggle {
-            display: flex;
-            align-items: center;
-        }
-
-        .switch {
-            position: relative;
-            width: 40px;
-            height: 20px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: #333;
+        .local-time {
+            font-family: 'Space Mono', monospace;
+            font-size: 16px;
+            color: #00ff88;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 16px;
             border-radius: 20px;
-            transition: background 0.3s;
-        }
-
-        body.light-mode .slider {
-            background: #ccc;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 2px;
-            bottom: 2px;
-            background: #00ff88;
-            border-radius: 50%;
-            transition: transform 0.3s, background 0.3s;
-        }
-
-        body.light-mode .slider:before {
-            background: #007bff;
-        }
-
-        input:checked + .slider {
-            background: #555;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(20px);
+            letter-spacing: 1px;
         }
 
         .hamburger {
-            display: none;
             font-size: 24px;
             cursor: pointer;
             color: #00ff88;
+            display: none;
         }
 
-        body.light-mode .hamburger {
-            color: #007bff;
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                position: fixed !important;
+                top: 0 !important;
+                left: 0;
+                right: 0;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                padding: 20px;
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                display: flex;
+                animation: slideIn 0.3s ease forwards;
+            }
+
+            .nav-links.closing {
+                animation: slideOut 0.3s ease forwards;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .local-time {
+                display: none;
+            }
         }
 
         /* General Button Style */
@@ -277,32 +236,46 @@
             text-decoration: none;
             font-size: 16px;
             font-weight: 600;
-            border-radius: 50px;
+            border-radius: 8px;
             transition: transform 0.3s, background 0.3s;
-        }
-
-        body.light-mode .btn {
-            background: #007bff;
-            color: #fff;
+            font-family: 'Space Mono', monospace;
         }
 
         .btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
             background: #00cc70;
         }
 
-        body.light-mode .btn:hover {
-            background: #0056b3;
+        /* Learn More Button with Hover Arrow */
+        .learn-more {
+            display: inline-flex;
+            align-items: center;
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
         }
 
-        /* Section Headers and Borders */
+        .learn-more i {
+            margin-left: 8px;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+
+        .learn-more:hover {
+            color: #00cc70;
+        }
+
+        .learn-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Section Headers */
         section {
             position: relative;
+            padding: 60px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        body.light-mode section {
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .section-header {
@@ -317,15 +290,47 @@
             animation: codeGlow 2s infinite;
         }
 
-        body.light-mode .section-header {
-            background: #f8f9fa;
-            color: #007bff;
-        }
-
         @media (max-width: 768px) {
             .section-header {
                 left: 20px;
                 font-size: 20px;
+            }
+        }
+
+        /* Side Decorations (Desktop Only) */
+        .side-decor {
+            position: absolute;
+            top: 0;
+            width: calc((100% - 1200px) / 2);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: #00ff88;
+            opacity: 0.3;
+        }
+
+        .side-decor.left {
+            left: -100px;
+            border-right: 1px solid rgba(0, 255, 136, 0.2);
+            margin-right: 10px;
+        }
+
+        .side-decor.right {
+            right: -100px;
+            border-left: 1px solid rgba(0, 255, 136, 0.2);
+            margin-left: 10px;
+        }
+
+        .side-decor p {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .side-decor {
+                display: none;
             }
         }
 
@@ -339,14 +344,10 @@
             align-items: center;
             text-align: center;
             padding: 0 60px;
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 123, 255, 0.1));
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2) 0%, rgba(0, 123, 255, 0.2) 100%);
             position: relative;
             overflow: hidden;
             border-top: none;
-        }
-
-        body.light-mode .hero {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 123, 255, 0.05));
         }
 
         .hero h1 {
@@ -360,10 +361,6 @@
             color: #00ff88;
             font-family: 'Space Mono', monospace;
             animation: codeGlow 2s infinite;
-        }
-
-        body.light-mode .hero h1 span {
-            color: #007bff;
         }
 
         .hero p {
@@ -382,24 +379,16 @@
             animation: bounce 2s infinite;
         }
 
-        body.light-mode .hero-arrow {
-            color: #007bff;
-        }
-
         /* About Section */
         .about {
-            padding: 60px;
-            text-align: center;
             background: #0f0f0f;
-        }
-
-        body.light-mode .about {
-            background: #f1f3f5;
+            position: relative;
         }
 
         .about-content {
             max-width: 1200px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .about h2 {
@@ -408,10 +397,6 @@
             font-family: 'Space Mono', monospace;
             color: #00ff88;
             animation: codeGlow 2s infinite;
-        }
-
-        body.light-mode .about h2 {
-            color: #007bff;
         }
 
         .about p {
@@ -434,10 +419,6 @@
             padding: 30px;
             text-align: center;
             transition: transform 0.3s;
-        }
-
-        body.light-mode .about-grid-item {
-            background: rgba(0, 0, 0, 0.05);
         }
 
         .about-grid-item:hover {
@@ -463,20 +444,16 @@
             margin-bottom: 20px;
         }
 
-        /* Why Choose Us Section */
+        /* Why Us Section */
         .why-choose-us {
-            padding: 60px;
-            text-align: center;
             background: linear-gradient(to bottom, #0f0f0f, #1a1a1a);
-        }
-
-        body.light-mode .why-choose-us {
-            background: linear-gradient(to bottom, #f1f3f5, #e9ecef);
+            position: relative;
         }
 
         .why-choose-us-content {
             max-width: 1200px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .why-choose-us h2 {
@@ -485,10 +462,6 @@
             font-family: 'Space Mono', monospace;
             color: #00ff88;
             animation: codeGlow 2s infinite;
-        }
-
-        body.light-mode .why-choose-us h2 {
-            color: #007bff;
         }
 
         .why-choose-us p {
@@ -511,10 +484,11 @@
             padding: 30px;
             text-align: center;
             transition: transform 0.3s;
-        }
-
-        body.light-mode .why-choose-us-item {
-            background: rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 250px;
         }
 
         .why-choose-us-item:hover {
@@ -525,10 +499,6 @@
             font-size: 40px;
             color: #00ff88;
             margin-bottom: 20px;
-        }
-
-        body.light-mode .why-choose-us-item i {
-            color: #007bff;
         }
 
         .why-choose-us-item h3 {
@@ -543,18 +513,14 @@
 
         /* Stats Section */
         .stats {
-            padding: 60px;
-            text-align: center;
             background: #1a1a1a;
-        }
-
-        body.light-mode .stats {
-            background: #e9ecef;
+            position: relative;
         }
 
         .stats-content {
             max-width: 1200px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .stats h2 {
@@ -563,10 +529,6 @@
             font-family: 'Space Mono', monospace;
             color: #00ff88;
             animation: codeGlow 2s infinite;
-        }
-
-        body.light-mode .stats h2 {
-            color: #007bff;
         }
 
         .stats p {
@@ -588,10 +550,11 @@
             padding: 30px;
             text-align: center;
             transition: transform 0.3s;
-        }
-
-        body.light-mode .stat-item {
-            background: rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
         }
 
         .stat-item:hover {
@@ -604,19 +567,12 @@
             margin-bottom: 10px;
         }
 
-        body.light-mode .stat-item i {
-            color: #007bff;
-        }
-
         .stat-item h3 {
             font-size: 36px;
             font-weight: 700;
             color: #00ff88;
             font-family: 'Space Mono', monospace;
-        }
-
-        body.light-mode .stat-item h3 {
-            color: #007bff;
+            margin-bottom: 10px;
         }
 
         .stat-item p {
@@ -624,98 +580,16 @@
             opacity: 0.7;
         }
 
-        /* Capabilities Section */
-        .capabilities {
-            padding: 60px;
-            text-align: center;
-            background: linear-gradient(to bottom, #1a1a1a, #0f0f0f);
-        }
-
-        body.light-mode .capabilities {
-            background: linear-gradient(to bottom, #e9ecef, #f1f3f5);
-        }
-
-        .capabilities-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .capabilities h2 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            font-family: 'Space Mono', monospace;
-            color: #00ff88;
-            animation: codeGlow 2s infinite;
-        }
-
-        body.light-mode .capabilities h2 {
-            color: #007bff;
-        }
-
-        .capabilities p {
-            font-size: 20px;
-            max-width: 900px;
-            margin: 0 auto 40px;
-            opacity: 0.8;
-        }
-
-        .capabilities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .capability-item {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        body.light-mode .capability-item {
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        .capability-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .capability-item i {
-            font-size: 40px;
-            color: #00ff88;
-            margin-bottom: 20px;
-        }
-
-        body.light-mode .capability-item i {
-            color: #007bff;
-        }
-
-        .capability-item h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .capability-item p {
-            font-size: 16px;
-            opacity: 0.8;
-        }
-
         /* Tech Stack Section */
         .tech-stack {
-            padding: 60px;
-            text-align: center;
             background: #0f0f0f;
-        }
-
-        body.light-mode .tech-stack {
-            background: #f1f3f5;
+            position: relative;
         }
 
         .tech-stack-content {
             max-width: 1200px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .tech-stack h2 {
@@ -726,10 +600,6 @@
             animation: codeGlow 2s infinite;
         }
 
-        body.light-mode .tech-stack h2 {
-            color: #007bff;
-        }
-
         .tech-stack p {
             font-size: 20px;
             max-width: 900px;
@@ -738,15 +608,12 @@
         }
 
         .tech-stack-categories {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
-            justify-content: center;
         }
 
         .tech-category {
-            flex: 1;
-            min-width: 300px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
             padding: 30px;
@@ -754,22 +621,7 @@
             position: relative;
         }
 
-        body.light-mode .tech-category {
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        .tech-category h3 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #00ff88;
-            font-family: 'Space Mono', monospace;
-        }
-
-        body.light-mode .tech-category h3 {
-            color: #007bff;
-        }
-
-        .tech-category h3::before {
+        .tech-category::before {
             content: '';
             position: absolute;
             top: 0;
@@ -778,10 +630,15 @@
             height: 5px;
             background: linear-gradient(90deg, #00ff88, transparent);
             border-radius: 15px 15px 0 0;
+            transition: transform 0.3s;
         }
 
-        body.light-mode .tech-category h3::before {
-            background: linear-gradient(90deg, #007bff, transparent);
+
+        .tech-category h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #00ff88;
+            font-family: 'Space Mono', monospace;
         }
 
         .tech-category-grid {
@@ -800,10 +657,7 @@
             justify-content: center;
             align-items: center;
             transition: transform 0.3s;
-        }
-
-        body.light-mode .tech-item {
-            background: rgba(0, 0, 0, 0.03);
+            position: relative;
         }
 
         .tech-item:hover {
@@ -816,10 +670,6 @@
             margin-bottom: 10px;
         }
 
-        body.light-mode .tech-item i {
-            color: #007bff;
-        }
-
         .tech-item p {
             font-size: 14px;
             font-family: 'Space Mono', monospace;
@@ -827,24 +677,19 @@
 
         .tech-tooltip {
             position: absolute;
-            top: -60px;
+            top: -50px;
             left: 50%;
             transform: translateX(-50%);
             background: #00ff88;
             color: #0a0a0a;
-            padding: 10px;
+            padding: 8px 12px;
             border-radius: 5px;
             font-size: 12px;
-            width: 200px;
+            width: 150px;
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.3s;
             z-index: 10;
-        }
-
-        body.light-mode .tech-tooltip {
-            background: #007bff;
-            color: #fff;
         }
 
         .tech-item:hover .tech-tooltip {
@@ -862,24 +707,16 @@
             border-color: #00ff88 transparent transparent transparent;
         }
 
-        body.light-mode .tech-tooltip::after {
-            border-color: #007bff transparent transparent transparent;
-        }
-
         /* Services Section */
         .services {
-            padding: 60px;
-            text-align: center;
             background: #1a1a1a;
-        }
-
-        body.light-mode .services {
-            background: #e9ecef;
+            position: relative;
         }
 
         .services-content {
             max-width: 1200px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .services h2 {
@@ -888,10 +725,6 @@
             font-family: 'Space Mono', monospace;
             color: #00ff88;
             animation: codeGlow 2s infinite;
-        }
-
-        body.light-mode .services h2 {
-            color: #007bff;
         }
 
         .services p {
@@ -915,10 +748,10 @@
             transition: transform 0.3s;
             position: relative;
             overflow: hidden;
-        }
-
-        body.light-mode .service-item {
-            background: rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 300px;
         }
 
         .service-item:hover {
@@ -936,10 +769,6 @@
             transition: transform 0.3s;
         }
 
-        body.light-mode .service-item::before {
-            background: linear-gradient(90deg, #007bff, transparent);
-        }
-
         .service-item:hover::before {
             transform: scaleX(1.1);
         }
@@ -948,10 +777,6 @@
             font-size: 40px;
             color: #00ff88;
             margin-bottom: 20px;
-        }
-
-        body.light-mode .service-item i {
-            color: #007bff;
         }
 
         .service-item h3 {
@@ -963,22 +788,23 @@
             font-size: 16px;
             opacity: 0.8;
             margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .service-item .btn {
+            align-self: center;
         }
 
         /* Showreel Section */
         .showreel {
-            padding: 60px;
-            text-align: center;
             background: linear-gradient(to bottom, #1a1a1a, #0f0f0f);
-        }
-
-        body.light-mode .showreel {
-            background: linear-gradient(to bottom, #e9ecef, #f1f3f5);
+            position: relative;
         }
 
         .showreel-content {
             max-width: 1200px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .showreel h2 {
@@ -989,10 +815,6 @@
             animation: codeGlow 2s infinite;
         }
 
-        body.light-mode .showreel h2 {
-            color: #007bff;
-        }
-
         .showreel p {
             font-size: 20px;
             max-width: 900px;
@@ -1001,97 +823,57 @@
         }
 
         .showreel-grid {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
-            justify-content: center;
+            margin-bottom: 40px;
         }
 
         .showreel-item {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
-            overflow: hidden;
-            width: 100%;
-            max-width: 500px;
-            display: flex;
-            align-items: center;
+            padding: 20px;
             transition: transform 0.3s;
-            position: relative;
-        }
-
-        body.light-mode .showreel-item {
-            background: rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
         .showreel-item:hover {
             transform: translateY(-5px);
         }
 
-        .showreel-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #00ff88, transparent);
-            transition: transform 0.3s;
-        }
-
-        body.light-mode .showreel-item::before {
-            background: linear-gradient(90deg, #007bff, transparent);
-        }
-
-        .showreel-item:hover::before {
-            transform: scaleX(1.1);
-        }
-
         .showreel-item img {
-            width: 200px;
+            width: 100%;
             height: 150px;
             object-fit: cover;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        body.light-mode .showreel-item img {
-            border-right: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        .showreel-item-content {
-            padding: 20px;
-            flex: 1;
-            text-align: left;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
         .showreel-item h3 {
-            font-size: 24px;
+            font-size: 20px;
             color: #00ff88;
             margin-bottom: 10px;
         }
 
-        body.light-mode .showreel-item h3 {
-            color: #007bff;
-        }
-
         .showreel-item p {
-            font-size: 16px;
+            font-size: 14px;
             opacity: 0.8;
             margin-bottom: 20px;
+            flex-grow: 1;
         }
 
         .showreel-item a {
+            padding: 10px 20px;
+            background: transparent;
             color: #00ff88;
             text-decoration: none;
-            font-size: 16px;
-            padding: 10px 20px;
-            border: 1px solid #00ff88;
+            font-size: 14px;
+            border: 2px solid #00ff88;
             border-radius: 25px;
             transition: background 0.3s, color 0.3s;
-        }
-
-        body.light-mode .showreel-item a {
-            color: #007bff;
-            border-color: #007bff;
         }
 
         .showreel-item a:hover {
@@ -1099,25 +881,16 @@
             color: #0a0a0a;
         }
 
-        body.light-mode .showreel-item a:hover {
-            background: #007bff;
-            color: #fff;
-        }
-
         /* Process Section */
         .process {
-            padding: 60px;
-            text-align: center;
             background: #0f0f0f;
-        }
-
-        body.light-mode .process {
-            background: #f1f3f5;
+            position: relative;
         }
 
         .process-content {
             max-width: 1200px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .process h2 {
@@ -1128,10 +901,6 @@
             animation: codeGlow 2s infinite;
         }
 
-        body.light-mode .process h2 {
-            color: #007bff;
-        }
-
         .process p {
             font-size: 20px;
             max-width: 900px;
@@ -1139,9 +908,30 @@
             opacity: 0.8;
         }
 
+        .process-layout {
+            display: flex;
+            gap: 40px;
+            align-items: stretch;
+            min-height: 100%;
+        }
+
         .process-timeline {
-            max-width: 800px;
-            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .timeline-header {
+            font-size: 28px;
+            font-family: 'Space Mono', monospace;
+            color: #00ff88;
+            margin-bottom: 20px;
+            text-align: left;
+            animation: codeGlow 2s infinite;
         }
 
         .process-step {
@@ -1149,6 +939,9 @@
             align-items: center;
             margin-bottom: 40px;
             gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
         }
 
         .process-step:nth-child(even) {
@@ -1164,23 +957,15 @@
             border-radius: 10px;
         }
 
-        body.light-mode .process-step .step-number {
-            color: #007bff;
-            background: rgba(0, 0, 0, 0.05);
-        }
-
         .process-step .step-content {
             text-align: left;
+            flex: 1;
         }
 
         .process-step i {
             font-size: 30px;
             color: #00ff88;
             margin-bottom: 10px;
-        }
-
-        body.light-mode .process-step i {
-            color: #007bff;
         }
 
         .process-step h3 {
@@ -1202,28 +987,164 @@
             transition: opacity 0.3s;
         }
 
-        body.light-mode .process-step a {
-            color: #007bff;
-        }
-
         .process-step a:hover {
             opacity: 1;
         }
 
-        /* Testimonials Section */
-        .testimonials {
-            padding: 60px;
-            text-align: center;
-            background: #1a1a1a;
+        .process-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            grid-template-rows: auto auto 1fr;
+            grid-template-areas:
+                "item1 item2"
+                "item3 item4"
+                "overview overview";
+            height: 100%;
         }
 
-        body.light-mode .testimonials {
-            background: #e9ecef;
+        .process-grid-item:nth-child(1) { grid-area: item1; }
+        .process-grid-item:nth-child(2) { grid-area: item2; }
+        .process-grid-item:nth-child(3) { grid-area: item3; }
+        .process-grid-item:nth-child(4) { grid-area: item4; }
+        .process-overview { grid-area: overview; }
+
+        .process-grid-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: left;
+            transition: transform 0.3s;
+        }
+
+        .process-grid-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .process-grid-item i {
+            font-size: 30px;
+            color: #00ff88;
+            margin-bottom: 15px;
+        }
+
+        .process-grid-item h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .process-grid-item p {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .process-grid-item .learn-more {
+            display: inline-flex;
+            align-items: center;
+            color: #00ff88;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .process-grid-item .learn-more i {
+            margin-left: 8px;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+
+        .process-grid-item .learn-more:hover {
+            color: #00cc70;
+        }
+
+        .process-grid-item .learn-more:hover i {
+            transform: translateX(5px);
+        }
+
+        .process-overview {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: left;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .process-overview:hover {
+            transform: translateY(-5px);
+        }
+
+        .process-overview i {
+            font-size: 30px;
+            color: #00ff88;
+            margin-bottom: 15px;
+        }
+
+        .process-overview h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .process-overview p {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .process-benefits {
+            list-style: none;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .process-benefits li {
+            font-size: 16px;
+            color: #e0e0e0;
+            opacity: 0.8;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .process-benefits li i {
+            font-size: 16px;
+            color: #00ff88;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 1024px) {
+            .process-layout {
+                flex-direction: column;
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-template-rows: auto;
+                grid-template-areas:
+                    "item1 item2"
+                    "item3 item4"
+                    "overview overview";
+            }
+
+            .process-overview {
+                min-height: 250px;
+            }
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: #1a1a1a;
+            position: relative;
         }
 
         .testimonials-content {
             max-width: 1200px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .testimonials h2 {
@@ -1232,10 +1153,6 @@
             font-family: 'Space Mono', monospace;
             color: #00ff88;
             animation: codeGlow 2s infinite;
-        }
-
-        body.light-mode .testimonials h2 {
-            color: #007bff;
         }
 
         .testimonials p {
@@ -1262,10 +1179,6 @@
             gap: 20px;
         }
 
-        body.light-mode .testimonial-item {
-            background: rgba(0, 0, 0, 0.05);
-        }
-
         .testimonial-item:hover {
             transform: translateY(-5px);
         }
@@ -1281,11 +1194,6 @@
             font-size: 20px;
             font-family: 'Space Mono', monospace;
             color: #00ff88;
-        }
-
-        body.light-mode .testimonial-item .avatar {
-            background: rgba(0, 0, 0, 0.1);
-            color: #007bff;
         }
 
         .testimonial-item .content {
@@ -1304,24 +1212,16 @@
             color: #00ff88;
         }
 
-        body.light-mode .testimonial-item h4 {
-            color: #007bff;
-        }
-
         /* Contact Section */
         .contact {
-            padding: 60px;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 123, 255, 0.1));
-        }
-
-        body.light-mode .contact {
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(0, 123, 255, 0.05));
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.2) 0%, rgba(0, 123, 255, 0.2) 100%);
+            position: relative;
         }
 
         .contact-content {
             max-width: 1200px;
             margin: 0 auto;
+            text-align: center;
         }
 
         .contact h2 {
@@ -1332,10 +1232,6 @@
             animation: codeGlow 2s infinite;
         }
 
-        body.light-mode .contact h2 {
-            color: #007bff;
-        }
-
         .contact p {
             font-size: 20px;
             max-width: 900px;
@@ -1343,20 +1239,26 @@
             opacity: 0.8;
         }
 
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .contact-layout {
+            display: flex;
             gap: 40px;
             margin-bottom: 40px;
+            align-items: stretch;
         }
 
-        .contact-form {
-            text-align: left;
+        .contact-form-wrapper, .contact-details-wrapper {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            flex: 1;
         }
 
-        .contact-form h3 {
+        .contact-form-wrapper h3, .contact-details-wrapper h3 {
             font-size: 24px;
             margin-bottom: 20px;
+            color: #00ff88;
+            font-family: 'Space Mono', monospace;
+            animation: codeGlow 2s infinite;
         }
 
         .contact-form form {
@@ -1365,23 +1267,33 @@
             gap: 20px;
         }
 
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row input {
+            flex: 1;
+        }
+
         .contact-form select,
         .contact-form input,
         .contact-form textarea {
             padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
             color: #e0e0e0;
             font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s;
         }
 
-        body.light-mode .contact-form select,
-        body.light-mode .contact-form input,
-        body.light-mode .contact-form textarea {
-            background: rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            color: #1a1a1a;
+        .contact-form select:focus,
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #00ff88;
+            outline: none;
         }
 
         .contact-form select {
@@ -1391,31 +1303,42 @@
             background-position: right 10px center;
         }
 
-        body.light-mode .contact-form select {
-            background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
-        }
-
         .contact-form textarea {
             resize: vertical;
             min-height: 150px;
+            font-family: 'Inter', sans-serif;
         }
 
         .contact-form .hidden-field {
             display: none;
         }
 
+        .contact-btn {
+            padding: 12px 30px;
+            background: #00ff88;
+            color: #0a0a0a;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .contact-btn:hover {
+            background: #00cc70;
+            transform: translateY(-2px);
+        }
+
         .contact-details {
             text-align: left;
         }
 
-        .contact-details h3 {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
         .contact-details p {
             font-size: 16px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             opacity: 0.8;
         }
 
@@ -1424,17 +1347,9 @@
             margin-right: 10px;
         }
 
-        body.light-mode .contact-details i {
-            color: #007bff;
-        }
-
         .contact-details a {
             color: #00ff88;
             text-decoration: none;
-        }
-
-        body.light-mode .contact-details a {
-            color: #007bff;
         }
 
         .contact-details a:hover {
@@ -1451,20 +1366,35 @@
             border-radius: 10px;
         }
 
+        @media (max-width: 768px) {
+            .contact-layout {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .contact-form-wrapper, .contact-details-wrapper {
+                padding: 20px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .contact-map iframe {
+                height: 200px;
+            }
+        }
+
         /* Footer */
         .footer {
             padding: 60px;
             background: #050505;
             color: #e0e0e0;
-        }
-
-        body.light-mode .footer {
-            background: #dee2e6;
-            color: #1a1a1a;
+            position: relative;
         }
 
         .footer-content {
-            max-width: 1200px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1477,10 +1407,6 @@
             color: #00ff88;
         }
 
-        body.light-mode .footer-column h3 {
-            color: #007bff;
-        }
-
         .footer-column p,
         .footer-column a {
             font-size: 16px;
@@ -1491,17 +1417,8 @@
             opacity: 0.8;
         }
 
-        body.light-mode .footer-column p,
-        body.light-mode .footer-column a {
-            color: #1a1a1a;
-        }
-
         .footer-column a:hover {
             color: #00ff88;
-        }
-
-        body.light-mode .footer-column a:hover {
-            color: #007bff;
         }
 
         .footer-newsletter form {
@@ -1510,19 +1427,39 @@
         }
 
         .footer-newsletter input {
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 5px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
             color: #e0e0e0;
             font-size: 16px;
             flex: 1;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s;
         }
 
-        body.light-mode .footer-newsletter input {
-            background: rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            color: #1a1a1a;
+        .footer-newsletter input:focus {
+            border-color: #00ff88;
+            outline: none;
+        }
+
+        .footer-btn {
+            padding: 12px 20px;
+            background: #00ff88;
+            color: #0a0a0a;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .footer-btn:hover {
+            background: #00cc70;
+            transform: translateY(-2px);
         }
 
         .footer-bottom {
@@ -1532,13 +1469,21 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        body.light-mode .footer-bottom {
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
         .footer-bottom p {
             font-size: 14px;
             opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .footer-newsletter form {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .footer-btn {
+                padding: 12px;
+                text-align: center;
+            }
         }
 
         /* Responsive Design */
@@ -1551,12 +1496,8 @@
                 font-size: 20px;
             }
 
-            .about-grid, .why-choose-us-grid, .capabilities-grid, .services-grid, .testimonials-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-
-            .showreel-item {
-                max-width: 400px;
+            .showreel-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -1565,31 +1506,7 @@
                 padding: 15px 20px;
             }
 
-            .hamburger {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: rgba(10, 10, 10, 0.9);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 20px;
-            }
-
-            body.light-mode .nav-links {
-                background: rgba(248, 249, 250, 0.9);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .hero, .about, .why-choose-us, .stats, .capabilities, .tech-stack, .services, .showreel, .process, .testimonials, .contact, .footer {
+            .hero, .about, .why-choose-us, .stats, .tech-stack, .services, .showreel, .process, .testimonials, .contact, .footer {
                 padding: 40px 20px;
             }
 
@@ -1606,44 +1523,24 @@
                 font-size: 18px;
             }
 
-            .about h2, .why-choose-us h2, .stats h2, .capabilities h2, .tech-stack h2, .services h2, .showreel h2, .process h2, .testimonials h2, .contact h2 {
+            .about h2, .why-choose-us h2, .stats h2, .tech-stack h2, .services h2, .showreel h2, .process h2, .testimonials h2, .contact h2 {
                 font-size: 36px;
             }
 
-            .about p, .why-choose-us p, .stats p, .capabilities p, .tech-stack p, .services p, .showreel p, .process p, .testimonials p, .contact p {
+            .about p, .why-choose-us p, .stats p, .tech-stack p, .services p, .showreel p, .process p, .testimonials p, .contact p {
                 font-size: 16px;
             }
 
-            .showreel-item {
-                flex-direction: column;
-                max-width: 100%;
-            }
-
-            .showreel-item img {
-                width: 100%;
-                height: 200px;
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            body.light-mode .showreel-item img {
-                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            }
-
-            .showreel-item-content {
-                text-align: center;
-            }
-
-            .contact-grid {
+            .showreel-grid {
                 grid-template-columns: 1fr;
             }
 
-            .contact-map iframe {
-                height: 200px;
+            .tech-stack-categories {
+                grid-template-columns: 1fr;
             }
 
-            .tech-stack-categories {
-                flex-direction: column;
+            .about, .why-choose-us, .stats, .tech-stack, .services, .showreel, .process, .testimonials, .contact {
+                background: #0a0a0a !important;
             }
         }
 
@@ -1656,7 +1553,7 @@
                 font-size: 16px;
             }
 
-            .about h2, .why-choose-us h2, .stats h2, .capabilities h2, .tech-stack h2, .services h2, .showreel h2, .process h2, .testimonials h2, .contact h2 {
+            .about h2, .why-choose-us h2, .stats h2, .tech-stack h2, .services h2, .showreel h2, .process h2, .testimonials h2, .contact h2 {
                 font-size: 28px;
             }
 
@@ -1664,9 +1561,583 @@
                 font-size: 28px;
             }
         }
+        /* Process Section */
+.process-layout {
+    display: flex;
+    gap: 40px;
+    align-items: stretch;
+    min-height: 100%;
+}
+
+.process-timeline {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.process-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+        "item1 item2"
+        "item3 item4"
+        "overview overview";
+    height: 100%;
+    min-height: 0;
+}
+
+.process-grid-item:nth-child(1) { grid-area: item1; }
+.process-grid-item:nth-child(2) { grid-area: item2; }
+.process-grid-item:nth-child(3) { grid-area: item3; }
+.process-grid-item:nth-child(4) { grid-area: item4; }
+.process-overview { grid-area: overview; }
+
+.process-grid-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: left;
+    transition: transform 0.3s;
+}
+
+.process-grid-item:hover {
+    transform: translateY(-5px);
+}
+
+.process-grid-item i {
+    font-size: 30px;
+    color: #00ff88;
+    margin-bottom: 15px;
+}
+
+.process-grid-item h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.process-grid-item p {
+    font-size: 16px;
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+.process-grid-item .learn-more {
+    display: inline-flex;
+    align-items: center;
+    color: #00ff88;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.process-grid-item .learn-more i {
+    margin-left: 8px;
+    font-size: 14px;
+    transition: transform 0.3s;
+}
+
+.process-grid-item .learn-more:hover {
+    color: #00cc70;
+}
+
+.process-grid-item .learn-more:hover i {
+    transform: translateX(5px);
+}
+
+.process-overview {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: left;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+}
+
+.process-overview:hover {
+    transform: translateY(-5px);
+}
+
+.process-overview i {
+    font-size: 30px;
+    color: #00ff88;
+    margin-bottom: 15px;
+}
+
+.process-overview h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.process-overview p {
+    font-size: 16px;
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+.process-benefits {
+    list-style: none;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.process-benefits li {
+    font-size: 16px;
+    color: #e0e0e0;
+    opacity: 0.8;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.process-benefits li i {
+    font-size: 16px;
+    color: #00ff88;
+    margin-right: 10px;
+}
+
+@media (max-width: 1024px) {
+    .process-layout {
+        flex-direction: column;
+    }
+
+    .process-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-template-rows: auto;
+        grid-template-areas:
+            "item1 item2"
+            "item3 item4"
+            "overview overview";
+    }
+
+    .process-overview {
+        min-height: 250px;
+    }
+}
+
+/* Contact Section */
+.contact-layout {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+    align-items: stretch;
+}
+
+.contact-form-wrapper, .contact-details-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    flex: 1;
+}
+
+.contact-form-wrapper h3, .contact-details-wrapper h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #00ff88;
+    font-family: 'Space Mono', monospace;
+    animation: codeGlow 2s infinite;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row input {
+    flex: 1;
+}
+
+.contact-form select,
+.contact-form input,
+.contact-form textarea {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #e0e0e0;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.3s;
+}
+
+.contact-form select:focus,
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #00ff88;
+    outline: none;
+}
+
+.contact-form select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 150px;
+    font-family: 'Inter', sans-serif;
+}
+
+.contact-form .hidden-field {
+    display: none;
+}
+
+.contact-btn {
+    padding: 12px 30px;
+    background: #00ff88;
+    color: #0a0a0a;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    font-family: 'Space Mono', monospace;
+}
+
+.contact-btn:hover {
+    background: #00cc70;
+    transform: translateY(-2px);
+}
+
+.contact-details {
+    text-align: left;
+}
+
+.contact-details p {
+    font-size: 16px;
+    margin-bottom: 15px;
+    opacity: 0.8;
+}
+
+.contact-details i {
+    color: #00ff88;
+    margin-right: 10px;
+}
+
+.contact-details a {
+    color: #00ff88;
+    text-decoration: none;
+}
+
+.contact-details a:hover {
+    text-decoration: underline;
+}
+
+.contact-map {
+    margin-top: 40px;
+}
+
+.contact-map iframe {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .contact-layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .contact-form-wrapper, .contact-details-wrapper {
+        padding: 20px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .contact-map iframe {
+        height: 200px;
+    }
+}
+
+/* Footer */
+.footer-newsletter form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.footer-newsletter input {
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #e0e0e0;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.3s;
+    width: 100%;
+}
+
+.footer-newsletter input:focus {
+    border-color: #00ff88;
+    outline: none;
+}
+
+.footer-btn {
+    padding: 12px 20px;
+    background: #00ff88;
+    color: #0a0a0a;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    font-family: 'Space Mono', monospace;
+    width: 100%;
+    text-align: center;
+}
+
+.footer-btn:hover {
+    background: #00cc70;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .footer-newsletter form {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .footer-btn {
+        padding: 12px;
+        text-align: center;
+    }
+}
+.process-layout {
+    display: flex;
+    gap: 40px;
+    align-items: stretch;
+    min-height: 100%;
+}
+
+.process-timeline {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.process-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    grid-template-rows: auto auto 1fr; /* Ensure the overview row takes remaining space */
+    grid-template-areas:
+        "item1 item2"
+        "item3 item4"
+        "overview overview";
+    height: 100%; /* Full height to match timeline */
+    min-height: 0;
+}
+
+.process-overview {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: left;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%; /* Ensure it stretches to match timeline height */
+}
+
+@media (max-width: 768px) {
+    .process-layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .process-grid {
+        grid-template-columns: 1fr; /* Stack all items in one column on mobile */
+        grid-template-rows: auto; /* Reset rows to auto for stacking */
+        grid-template-areas:
+            "item1"
+            "item2"
+            "item3"
+            "item4"
+            "overview";
+        height: auto; /* Allow natural height on mobile */
+    }
+
+    .process-grid-item,
+    .process-overview {
+        min-height: auto; /* Remove fixed height on mobile */
+    }
+}
+.process-grid-item .learn-more {
+    display: inline-flex;
+    align-items: center; /* Ensure vertical centering within the flex container */
+    color: #00ff88;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s;
+    line-height: 1; /* Normalize line height to prevent extra spacing */
+}
+
+.process-grid-item .learn-more i {
+    margin-left: 8px;
+    font-size: 14px;
+    transition: transform 0.3s;
+    display: inline-flex;
+    align-items: center; /* Center the icon vertically */
+    justify-content: center;
+    position: relative;
+    top: 0; /* Remove any manual offset */
+}
+
+.process-grid-item .learn-more:hover {
+    color: #00cc70;
+}
+
+.process-grid-item .learn-more:hover i {
+    transform: translateX(5px);
+}
+
+.contact-form-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    flex: 1;
+}
+
+.contact-form-wrapper h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #00ff88;
+    font-family: 'Space Mono', monospace;
+    animation: codeGlow 2s infinite;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.form-row input {
+    flex: 1;
+    min-width: 0;
+}
+
+.contact-form select,
+.contact-form input,
+.contact-form textarea {
+    padding: 15px;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #e0e0e0;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    transition: border-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.contact-form select:focus,
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #00ff88;
+    outline: none;
+}
+
+.contact-form select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 40px; /* Ensure space for the dropdown arrow */
+    margin-top: 20px;
+}
+
+.contact-form select:invalid {
+    color: #888; /* Style placeholder text in the select */
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 150px;
+    margin-top: 20px;
+}
+
+.contact-form .hidden-field {
+    display: none;
+}
+
+.contact-btn {
+    padding: 12px 30px;
+    background: #00ff88;
+    color: #0a0a0a;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    transition: background 0.3s, transform 0.3s;
+    font-family: 'Space Mono', monospace;
+    align-self: flex-start;
+}
+
+.contact-btn:hover {
+    background: #00cc70;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .contact-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
     </style>
 </head>
-<body class="dark-mode">
+<body>
 <!-- Loader -->
 <div class="loader">
     <div class="loader-text">
@@ -1677,92 +2148,90 @@
 </div>
 
 <!-- Navbar -->
-<nav class="navbar fade-in">
+<nav class="navbar">
     <div class="logo">KODE</div>
     <div class="nav-links">
         <a href="#home" class="active">Home</a>
         <a href="#about">About</a>
         <a href="#why-choose-us">Why Us</a>
-        <a href="#capabilities">Capabilities</a>
         <a href="#services">Services</a>
         <a href="#showreel">Showreel</a>
         <a href="#process">Process</a>
         <a href="#contact">Contact</a>
     </div>
-    <div class="nav-toggle">
-        <label class="switch">
-            <input type="checkbox" onchange="toggleMode()">
-            <span class="slider"></span>
-        </label>
-    </div>
+    <div class="local-time">[00:00]</div>
     <div class="hamburger"><i class="fas fa-bars"></i></div>
 </nav>
 
 <!-- Hero Section -->
 <section class="hero" id="home">
-    <h1 class="fade-in">
+    <h1>
         We Build <span>Code</span> That Powers Your Future
     </h1>
-    <p class="fade-in" style="animation-delay: 0.2s;">
+    <p>
         KODE delivers cutting-edge websites, apps, and AI solutions with speed and precision—using the latest tools to ensure premium quality.
     </p>
-    <a href="#about" class="hero-arrow fade-in" style="animation-delay: 0.4s;"><i class="fas fa-chevron-down"></i></a>
+    <a href="#about" class="hero-arrow"><i class="fas fa-chevron-down"></i></a>
 </section>
 
 <!-- About Section -->
 <section class="about" id="about">
     <div class="section-header">About Us</div>
+    <div class="side-decor left"></div>
+    <div class="side-decor right"></div>
     <div class="about-content">
         <h2 class="fade-in">Who We Are</h2>
-        <p class="fade-in" style="animation-delay: 0.2s;">
+        <p class="fade-in">
             At KODE, we’re a team of innovators who stay ahead of the curve. We use the latest tech to deliver fast, high-quality solutions that drive your business forward.
         </p>
         <div class="about-grid">
-            <div class="about-grid-item fade-in" style="animation-delay: 0.4s;">
+            <div class="about-grid-item">
                 <img src="https://placehold.co/300x200" alt="Our Team">
-                <h3>Our Team</h3>
-                <p>Expert developers and designers passionate about innovation.</p>
+                <h3 class="fade-in">Our Team</h3>
+                <p class="fade-in">Expert developers and designers passionate about innovation.</p>
                 <a href="team.html" class="btn">Meet the Team</a>
             </div>
-            <div class="about-grid-item fade-in" style="animation-delay: 0.5s;">
+            <div class="about-grid-item">
                 <img src="https://placehold.co/300x200" alt="Our Mission">
-                <h3>Our Mission</h3>
-                <p>Empowering businesses with cutting-edge technology.</p>
+                <h3 class="fade-in">Our Mission</h3>
+                <p class="fade-in">Empowering businesses with cutting-edge technology.</p>
                 <a href="mission.html" class="btn">Our Mission</a>
             </div>
-            <div class="about-grid-item fade-in" style="animation-delay: 0.6s;">
+            <div class="about-grid-item">
                 <img src="https://placehold.co/300x200" alt="Our Values">
-                <h3>Our Values</h3>
-                <p>Quality, speed, and innovation at the core of everything we do.</p>
+                <h3 class="fade-in">Our Values</h3>
+                <p class="fade-in">Quality, speed, and innovation at the core of everything we do.</p>
                 <a href="values.html" class="btn">Our Values</a>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Why Choose Us Section -->
+<!-- Why Us Section -->
 <section class="why-choose-us" id="why-choose-us">
     <div class="section-header">Why Choose Us</div>
+    <div class="side-decor left"></div>
+    <div class="side-decor right"></div>
     <div class="why-choose-us-content">
-        <h2 class="fade-in">Why Choose KODE Over Freelancers</h2>
-        <p class="fade-in" style="animation-delay: 0.2s;">
+        <h2 class="fade-in">What Sets KODE Apart</h2>
+        <p class="fade-in">
             We provide a reliable, professional alternative to freelancers, ensuring your project is completed smoothly and maintained long-term.
         </p>
         <div class="why-choose-us-grid">
-            <div class="why-choose-us-item fade-in" style="animation-delay: 0.4s;">
+            <div class="why-choose-us-item">
                 <i class="fas fa-check-circle"></i>
-                <h3>Friction-Free Process</h3>
-                <p>Our streamlined workflow ensures a seamless experience from start to finish, with clear communication and no delays.</p>
+                <h3 class="fade-in">Friction-Free Process</h3>
+                <p class="fade-in">Our streamlined workflow ensures a seamless experience from start to finish, with clear communication and no delays.</p>
             </div>
-            <div class="why-choose-us-item fade-in" style="animation-delay: 0.5s;">
+            <div class="why-choose-us-item">
                 <i class="fas fa-tools"></i>
-                <h3>Ongoing Maintenance</h3>
-                <p>Unlike freelancers who may leave your project buggy, we provide continuous support to keep your solution running smoothly.</p>
+                <h3 class="fade-in">Ongoing Maintenance</h3>
+                <p class="fade-in">Unlike freelancers who may leave your project buggy, we provide continuous support to keep your solution running smoothly.</p>
             </div>
-            <div class="why-choose-us-item fade-in" style="animation-delay: 0.6s;">
+            <div class="why-choose-us-item">
                 <i class="fas fa-users"></i>
-                <h3>Dedicated Team</h3>
-                <p>Our team collaborates to deliver consistent quality, ensuring your project isn’t left incomplete or unsupported.</p>
+                <h3 class="fade-in">Dedicated Team</h3>
+                <p class="fade-in">Our team collaborates to deliver consistent quality, ensuring your project isn’t left incomplete or unsupported.</p>
             </div>
         </div>
     </div>
@@ -1771,64 +2240,33 @@
 <!-- Stats Section -->
 <section class="stats" id="stats">
     <div class="section-header">Our Impact</div>
+    <div class="side-decor left"></div>
+    <div class="side-decor right"></div>
     <div class="stats-content">
-        <h2 class="fade-in">Our Impact</h2>
-        <p class="fade-in" style="animation-delay: 0.2s;">
+        <h2 class="fade-in">Our Achievements</h2>
+        <p class="fade-in">
             We’ve made a difference for businesses worldwide with our innovative solutions.
         </p>
         <div class="stats-grid">
-            <div class="stat-item fade-in" style="animation-delay: 0.4s;">
+            <div class="stat-item">
                 <i class="fas fa-clock"></i>
                 <h3 data-count="10">0+</h3>
-                <p>Years of Experience</p>
+                <p class="fade-in">Years of Experience</p>
             </div>
-            <div class="stat-item fade-in" style="animation-delay: 0.5s;">
+            <div class="stat-item">
                 <i class="fas fa-project-diagram"></i>
                 <h3 data-count="75">0+</h3>
-                <p>Projects Delivered</p>
+                <p class="fade-in">Projects Delivered</p>
             </div>
-            <div class="stat-item fade-in" style="animation-delay: 0.6s;">
+            <div class="stat-item">
                 <i class="fas fa-smile"></i>
                 <h3 data-count="100">0%</h3>
-                <p>Client Satisfaction</p>
+                <p class="fade-in">Client Satisfaction</p>
             </div>
-            <div class="stat-item fade-in" style="animation-delay: 0.7s;">
+            <div class="stat-item">
                 <i class="fas fa-globe"></i>
                 <h3 data-count="50">0+</h3>
-                <p>Countries Served</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Capabilities Section -->
-<section class="capabilities" id="capabilities">
-    <div class="section-header">Capabilities</div>
-    <div class="capabilities-content">
-        <h2 class="fade-in">What We Can Do For You</h2>
-        <p class="fade-in" style="animation-delay: 0.2s;">
-            We offer a wide range of services to help your business thrive in the digital world.
-        </p>
-        <div class="capabilities-grid">
-            <div class="capability-item fade-in" style="animation-delay: 0.4s;">
-                <i class="fas fa-globe"></i>
-                <h3>Scalable Websites</h3>
-                <p>Build responsive, high-performance websites that grow with your business.</p>
-            </div>
-            <div class="capability-item fade-in" style="animation-delay: 0.5s;">
-                <i class="fas fa-mobile-alt"></i>
-                <h3>Cross-Platform Apps</h3>
-                <p>Develop apps that work seamlessly on iOS, Android, and web platforms.</p>
-            </div>
-            <div class="capability-item fade-in" style="animation-delay: 0.6s;">
-                <i class="fas fa-robot"></i>
-                <h3>AI-Powered Solutions</h3>
-                <p>Integrate AI to automate processes, gain insights, and enhance user experiences.</p>
-            </div>
-            <div class="capability-item fade-in" style="animation-delay: 0.7s;">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Secure Systems</h3>
-                <p>Ensure your digital assets are protected with robust security measures.</p>
+                <p class="fade-in">Countries Served</p>
             </div>
         </div>
     </div>
@@ -1837,79 +2275,116 @@
 <!-- Tech Stack Section -->
 <section class="tech-stack" id="tech-stack">
     <div class="section-header">Tech Stack</div>
+    <div class="side-decor left"></div>
+    <div class="side-decor right"></div>
     <div class="tech-stack-content">
         <h2 class="fade-in">Our Technology Expertise</h2>
-        <p class="fade-in" style="animation-delay: 0.2s;">
-            We use a curated selection of modern tools to deliver high-quality, scalable solutions.
+        <p class="fade-in">
+            Don’t know what these mean? No worries—what matters is we’ll bring your project to life with these fancy tools!
         </p>
         <div class="tech-stack-categories">
-            <div class="tech-category fade-in" style="animation-delay: 0.4s;">
-                <h3>Frontend</h3>
+            <div class="tech-category">
+                <h3 class="fade-in">Frontend</h3>
                 <div class="tech-category-grid">
                     <div class="tech-item">
                         <i class="fab fa-react"></i>
-                        <p>React</p>
+                        <p class="fade-in">React</p>
                         <div class="tech-tooltip">Dynamic, interactive web apps.</div>
                     </div>
                     <div class="tech-item">
                         <i class="fab fa-js"></i>
-                        <p>JavaScript</p>
+                        <p class="fade-in">JavaScript</p>
                         <div class="tech-tooltip">Interactive features for websites.</div>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-vuejs"></i>
+                        <p class="fade-in">Vue.js</p>
+                        <div class="tech-tooltip">Lightweight, flexible UIs.</div>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-angular"></i>
+                        <p class="fade-in">Angular</p>
+                        <div class="tech-tooltip">Robust, enterprise-grade apps.</div>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-html5"></i>
+                        <p class="fade-in">HTML5</p>
+                        <div class="tech-tooltip">Modern, semantic web structure.</div>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-css3-alt"></i>
+                        <p class="fade-in">CSS3</p>
+                        <div class="tech-tooltip">Slick, responsive styling.</div>
                     </div>
                 </div>
             </div>
-            <div class="tech-category fade-in" style="animation-delay: 0.5s;">
-                <h3>Backend</h3>
+            <div class="tech-category">
+                <h3 class="fade-in">Backend</h3>
                 <div class="tech-category-grid">
                     <div class="tech-item">
                         <i class="fab fa-node-js"></i>
-                        <p>Node.js</p>
+                        <p class="fade-in">Node.js</p>
                         <div class="tech-tooltip">Fast, scalable backend systems.</div>
                     </div>
                     <div class="tech-item">
                         <i class="fab fa-python"></i>
-                        <p>Python</p>
+                        <p class="fade-in">Python</p>
                         <div class="tech-tooltip">AI-driven solutions.</div>
                     </div>
                     <div class="tech-item">
                         <i class="fab fa-java"></i>
-                        <p>Java</p>
+                        <p class="fade-in">Java</p>
                         <div class="tech-tooltip">Robust enterprise applications.</div>
                     </div>
                     <div class="tech-item">
                         <i class="fab fa-golang"></i>
-                        <p>Go</p>
+                        <p class="fade-in">Go</p>
                         <div class="tech-tooltip">High-performance APIs.</div>
                     </div>
                     <div class="tech-item">
                         <i class="fab fa-rust"></i>
-                        <p>Rust</p>
+                        <p class="fade-in">Rust</p>
                         <div class="tech-tooltip">Secure, fast systems.</div>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-php"></i>
+                        <p class="fade-in">PHP</p>
+                        <div class="tech-tooltip">Versatile web backends.</div>
                     </div>
                 </div>
             </div>
-            <div class="tech-category fade-in" style="animation-delay: 0.6s;">
-                <h3>DevOps & Cloud</h3>
+            <div class="tech-category">
+                <h3 class="fade-in">Magic Infrastructure</h3>
                 <div class="tech-category-grid">
                     <div class="tech-item">
                         <i class="fab fa-docker"></i>
-                        <p>Docker</p>
+                        <p class="fade-in">Docker</p>
                         <div class="tech-tooltip">Containerized deployments.</div>
                     </div>
                     <div class="tech-item">
                         <i class="fab fa-aws"></i>
-                        <p>AWS</p>
+                        <p class="fade-in">AWS</p>
                         <div class="tech-tooltip">Scalable cloud hosting.</div>
                     </div>
-                </div>
-            </div>
-            <div class="tech-category fade-in" style="animation-delay: 0.7s;">
-                <h3>Database</h3>
-                <div class="tech-category-grid">
                     <div class="tech-item">
                         <i class="fas fa-database"></i>
-                        <p>PostgreSQL</p>
+                        <p class="fade-in">PostgreSQL</p>
                         <div class="tech-tooltip">Powerful data management.</div>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-google"></i>
+                        <p class="fade-in">GCP</p>
+                        <div class="tech-tooltip">Google’s cloud magic.</div>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fab fa-git"></i>
+                        <p class="fade-in">Git</p>
+                        <div class="tech-tooltip">Version control wizardry.</div>
+                    </div>
+                    <div class="tech-item">
+                        <i class="fas fa-server"></i>
+                        <p class="fade-in">Kubernetes</p>
+                        <div class="tech-tooltip">Orchestrating chaos.</div>
                     </div>
                 </div>
             </div>
@@ -1920,29 +2395,49 @@
 <!-- Services Section -->
 <section class="services" id="services">
     <div class="section-header">Services</div>
+    <div class="side-decor left"></div>
+    <div class="side-decor right"></div>
     <div class="services-content">
         <h2 class="fade-in">Our Services</h2>
-        <p class="fade-in" style="animation-delay: 0.2s;">
+        <p class="fade-in">
             From websites to AI-driven tools, we build solutions that help your business thrive.
         </p>
         <div class="services-grid">
-            <div class="service-item fade-in" style="animation-delay: 0.4s;">
+            <div class="service-item">
                 <i class="fas fa-code"></i>
-                <h3>Web Development</h3>
-                <p>Modern, responsive websites that engage users and grow with your business.</p>
+                <h3 class="fade-in">Web Development</h3>
+                <p class="fade-in">Modern, responsive websites that engage users and grow with your business.</p>
                 <a href="web-development.html" class="btn">Explore Web Solutions</a>
             </div>
-            <div class="service-item fade-in" style="animation-delay: 0.5s;">
+            <div class="service-item">
                 <i class="fas fa-mobile-alt"></i>
-                <h3>App Development</h3>
-                <p>Seamless, high-performance apps for iOS and Android.</p>
+                <h3 class="fade-in">App Development</h3>
+                <p class="fade-in">Seamless, high-performance apps for iOS and Android.</p>
                 <a href="app-development.html" class="btn">Explore App Solutions</a>
             </div>
-            <div class="service-item fade-in" style="animation-delay: 0.6s;">
+            <div class="service-item">
                 <i class="fas fa-robot"></i>
-                <h3>AI Integration</h3>
-                <p>Smart automation and insights to optimize your operations.</p>
+                <h3 class="fade-in">AI Integration</h3>
+                <p class="fade-in">Smart automation and insights to optimize your operations.</p>
                 <a href="ai-integration.html" class="btn">Explore AI Solutions</a>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-cloud"></i>
+                <h3 class="fade-in">Cloud Services</h3>
+                <p class="fade-in">Scalable cloud solutions for efficiency and growth.</p>
+                <a href="cloud-services.html" class="btn">Explore Cloud Solutions</a>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-shield-alt"></i>
+                <h3 class="fade-in">Cybersecurity</h3>
+                <p class="fade-in">Protect your digital assets with top-tier security.</p>
+                <a href="cybersecurity.html" class="btn">Explore Security Solutions</a>
+            </div>
+            <div class="service-item">
+                <i class="fas fa-chart-line"></i>
+                <h3 class="fade-in">Data Analytics</h3>
+                <p class="fade-in">Turn data into actionable insights for your business.</p>
+                <a href="data-analytics.html" class="btn">Explore Analytics Solutions</a>
             </div>
         </div>
     </div>
@@ -1951,44 +2446,50 @@
 <!-- Showreel Section -->
 <section class="showreel" id="showreel">
     <div class="section-header">Showreel</div>
+    <div class="side-decor left"></div>
+    <div class="side-decor right"></div>
     <div class="showreel-content">
         <h2 class="fade-in">Our Work</h2>
-        <p class="fade-in" style="animation-delay: 0.2s;">
+        <p class="fade-in">
             See how we’ve helped businesses like yours succeed with our innovative solutions.
         </p>
         <div class="showreel-grid">
-            <div class="showreel-item fade-in" style="animation-delay: 0.4s;">
-                <img src="https://i.ibb.co/2Zq5X1Q/breezy.png" alt="Breezy">
-                <div class="showreel-item-content">
-                    <h3>Breezy</h3>
-                    <p>A dashboard for automating social media, saving time and costs with AI-driven workflows.</p>
-                    <a href="project-breezy.html">View Project</a>
-                </div>
+            <div class="showreel-item">
+                <img src="https://placehold.co/300x150" alt="Breezy">
+                <h3 class="fade-in">Breezy</h3>
+                <p class="fade-in">A dashboard for automating social media, saving time and costs with AI-driven workflows.</p>
+                <a href="project-breezy.html">View Project</a>
             </div>
-            <div class="showreel-item fade-in" style="animation-delay: 0.5s;">
-                <img src="https://i.ibb.co/5k0n1ZQ/tob.png" alt="Tower of Bedrock">
-                <div class="showreel-item-content">
-                    <h3>Tower of Bedrock</h3>
-                    <p>A vibrant site for a gaming community, built for engagement and scalability.</p>
-                    <a href="project-tob.html">View Project</a>
-                </div>
+            <div class="showreel-item">
+                <img src="https://placehold.co/300x150" alt="Tower of Bedrock">
+                <h3 class="fade-in">Tower of Bedrock</h3>
+                <p class="fade-in">A vibrant site for a gaming community, built for engagement and scalability.</p>
+                <a href="project-tob.html">View Project</a>
             </div>
-            <div class="showreel-item fade-in" style="animation-delay: 0.6s;">
-                <img src="https://placehold.co/200x150" alt="Bespoke Deliveries">
-                <div class="showreel-item-content">
-                    <h3>Bespoke Deliveries</h3>
-                    <p>A premium delivery service with a seamless user experience and real-time tracking.</p>
-                    <a href="project-bespoke.html">View Project</a>
-                </div>
+            <div class="showreel-item">
+                <img src="https://placehold.co/300x150" alt="Bespoke Deliveries">
+                <h3 class="fade-in">Bespoke Deliveries</h3>
+                <p class="fade-in">A premium delivery service with a seamless user experience and real-time tracking.</p>
+                <a href="project-bespoke.html">View Project</a>
             </div>
-            <div class="showreel-item fade-in" style="animation-delay: 0.7s;">
-                <img src="https://placehold.co/200x150" alt="EcoTrack">
-                <div class="showreel-item-content">
-                    <h3>EcoTrack</h3>
-                    <p>An app for tracking carbon footprints with AI-powered insights.</p>
-                    <a href="project-ecotrack.html">View Project</a>
-                </div>
+            <!--<div class="showreel-item">
+                <img src="https://placehold.co/300x150" alt="EcoTrack">
+                <h3 class="fade-in">EcoTrack</h3>
+                <p class="fade-in">An app for tracking carbon footprints with AI-powered insights.</p>
+                <a href="project-ecotrack.html">View Project</a>
             </div>
+            <div class="showreel-item">
+                <img src="https://placehold.co/300x150" alt="PulseFit">
+                <h3 class="fade-in">PulseFit</h3>
+                <p class="fade-in">A fitness app with real-time workout tracking and gamification.</p>
+                <a href="project-pulsefit.html">View Project</a>
+            </div>
+            <div class="showreel-item">
+                <img src="https://placehold.co/300x150" alt="SmartCart">
+                <h3 class="fade-in">SmartCart</h3>
+                <p class="fade-in">An e-commerce platform with AI-driven product recommendations.</p>
+                <a href="project-smartcart.html">View Project</a>
+            </div>-->
         </div>
     </div>
 </section>
@@ -1996,46 +2497,89 @@
 <!-- Process Section -->
 <section class="process" id="process">
     <div class="section-header">Process</div>
+    <div class="side-decor left"></div>
+    <div class="side-decor right"></div>
     <div class="process-content">
         <h2 class="fade-in">Our Process</h2>
-        <p class="fade-in" style="animation-delay: 0.2s;">
+        <p class="fade-in">
             We follow a streamlined process to ensure your project is delivered on time and exceeds expectations.
         </p>
-        <div class="process-timeline">
-            <div class="process-step fade-in" style="animation-delay: 0.4s;">
-                <div class="step-number">01</div>
-                <div class="step-content">
-                    <i class="fas fa-search"></i>
-                    <h3>Discovery</h3>
-                    <p>We understand your goals and vision to lay a strong foundation.</p>
-                    <a href="process-discovery.html">Learn More</a>
+        <div class="process-layout">
+            <div class="process-timeline">
+                <h3 class="timeline-header fade-in">Timeline</h3>
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <i class="fas fa-search"></i>
+                        <h3 class="fade-in">Discovery</h3>
+                        <p class="fade-in">We understand your goals and vision to lay a strong foundation.</p>
+                        <a href="process-discovery.html">Learn More</a>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <i class="fas fa-paint-brush"></i>
+                        <h3 class="fade-in">Design</h3>
+                        <p class="fade-in">We create intuitive designs that bring your ideas to life.</p>
+                        <a href="process-design.html">Learn More</a>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <i class="fas fa-code"></i>
+                        <h3 class="fade-in">Development</h3>
+                        <p class="fade-in">We build your solution using the latest tech for speed and quality.</p>
+                        <a href="process-development.html">Learn More</a>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <i class="fas fa-rocket"></i>
+                        <h3 class="fade-in">Launch & Support</h3>
+                        <p class="fade-in">We launch your project and provide ongoing support to ensure success.</p>
+                        <a href="process-launch.html">Learn More</a>
+                    </div>
                 </div>
             </div>
-            <div class="process-step fade-in" style="animation-delay: 0.5s;">
-                <div class="step-number">02</div>
-                <div class="step-content">
-                    <i class="fas fa-paint-brush"></i>
-                    <h3>Design</h3>
-                    <p>We create intuitive designs that bring your ideas to life.</p>
-                    <a href="process-design.html">Learn More</a>
+            <div class="process-grid">
+                <div class="process-grid-item">
+                    <i class="fas fa-users"></i>
+                    <h3 class="fade-in">Collaboration</h3>
+                    <p class="fade-in">We work closely with your team to align on goals and ensure transparency.</p>
+                    <a href="process-collaboration.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-            </div>
-            <div class="process-step fade-in" style="animation-delay: 0.6s;">
-                <div class="step-number">03</div>
-                <div class="step-content">
-                    <i class="fas fa-code"></i>
-                    <h3>Development</h3>
-                    <p>We build your solution using the latest tech for speed and quality.</p>
-                    <a href="process-development.html">Learn More</a>
+                <div class="process-grid-item">
+                    <i class="fas fa-vial"></i>
+                    <h3 class="fade-in">Testing</h3>
+                    <p class="fade-in">Rigorous testing to ensure your solution is bug-free and performs flawlessly.</p>
+                    <a href="process-testing.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
-            </div>
-            <div class="process-step fade-in" style="animation-delay: 0.7s;">
-                <div class="step-number">04</div>
-                <div class="step-content">
-                    <i class="fas fa-rocket"></i>
-                    <h3>Launch & Support</h3>
-                    <p>We launch your project and provide ongoing support to ensure success.</p>
-                    <a href="process-launch.html">Learn More</a>
+                <div class="process-grid-item">
+                    <i class="fas fa-cogs"></i>
+                    <h3 class="fade-in">Optimization</h3>
+                    <p class="fade-in">We fine-tune performance for speed, scalability, and user satisfaction.</p>
+                    <a href="process-optimization.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="process-grid-item">
+                    <i class="fas fa-sync-alt"></i>
+                    <h3 class="fade-in">Iteration</h3>
+                    <p class="fade-in">Continuous improvements based on feedback and evolving needs.</p>
+                    <a href="process-iteration.html" class="learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="process-overview">
+                    <i class="fas fa-road"></i>
+                    <h3 class="fade-in">Process Overview</h3>
+                    <p class="fade-in">Our end-to-end approach ensures every step is tailored to your needs, delivering a solution that grows with your business.</p>
+                    <ul class="process-benefits">
+                        <li><i class="fas fa-check-circle"></i> Tailored solutions for your business</li>
+                        <li><i class="fas fa-check-circle"></i> Transparent communication</li>
+                        <li><i class="fas fa-check-circle"></i> Scalable and future-proof designs</li>
+                        <li><i class="fas fa-check-circle"></i> Ongoing support and updates</li>
+                    </ul>
+                    <a href="process-overview.html" class="btn">See Full Process</a>
                 </div>
             </div>
         </div>
@@ -2045,31 +2589,33 @@
 <!-- Testimonials Section -->
 <section class="testimonials" id="testimonials">
     <div class="section-header">Testimonials</div>
+    <div class="side-decor left"></div>
+    <div class="side-decor right"></div>
     <div class="testimonials-content">
         <h2 class="fade-in">What Our Clients Say</h2>
-        <p class="fade-in" style="animation-delay: 0.2s;">
+        <p class="fade-in">
             Hear from businesses who’ve trusted us to bring their visions to life.
         </p>
         <div class="testimonials-grid">
-            <div class="testimonial-item fade-in" style="animation-delay: 0.4s;">
+            <div class="testimonial-item">
                 <div class="avatar">J.D</div>
                 <div class="content">
-                    <p>"KODE transformed our online presence with a stunning website. Their speed and quality are unmatched!"</p>
-                    <h4>Jane Doe, CEO of TechTrend</h4>
+                    <p class="fade-in">"KODE transformed our online presence with a stunning website. Their speed and quality are unmatched!"</p>
+                    <h4 class="fade-in">Jane Doe, CEO of TechTrend</h4>
                 </div>
             </div>
-            <div class="testimonial-item fade-in" style="animation-delay: 0.5s;">
+            <div class="testimonial-item">
                 <div class="avatar">J.S</div>
                 <div class="content">
-                    <p>"The AI tools KODE integrated into our platform have saved us countless hours. Highly recommend!"</p>
-                    <h4>John Smith, Founder of AutoBiz</h4>
+                    <p class="fade-in">"The AI tools KODE integrated into our platform have saved us countless hours. Highly recommend!"</p>
+                    <h4 class="fade-in">John Smith, Founder of AutoBiz</h4>
                 </div>
             </div>
-            <div class="testimonial-item fade-in" style="animation-delay: 0.6s;">
+            <div class="testimonial-item">
                 <div class="avatar">E.B</div>
                 <div class="content">
-                    <p>"Their app development team delivered a seamless experience for our users. Truly top-notch!"</p>
-                    <h4>Emily Brown, COO of ShopEasy</h4>
+                    <p class="fade-in">"Their app development team delivered a seamless experience for our users. Truly top-notch!"</p>
+                    <h4 class="fade-in">Emily Brown, COO of ShopEasy</h4>
                 </div>
             </div>
         </div>
@@ -2081,44 +2627,49 @@
     <div class="section-header">Contact</div>
     <div class="contact-content">
         <h2 class="fade-in">Get in Touch</h2>
-        <p class="fade-in" style="animation-delay: 0.2s;">
+        <p class="fade-in">
             Ready to build something amazing? Let’s turn your ideas into reality with fast, premium-quality solutions.
         </p>
-        <div class="contact-grid">
-            <div class="contact-form fade-in" style="animation-delay: 0.4s;">
-                <h3>Send Us a Message</h3>
-                <form id="contact-form">
-                    <select id="contact-type" onchange="updateFormFields()" required>
-                        <option value="" disabled selected>Select a Reason for Contact</option>
-                        <option value="quote">Request a Quote</option>
-                        <option value="question">I Have a Question</option>
-                        <option value="support">Technical Support</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <div id="quote-field" class="hidden-field">
-                        <textarea placeholder="Describe your project (e.g., website, app, AI solution)" required></textarea>
-                    </div>
-                    <div id="question-field" class="hidden-field">
-                        <input type="text" placeholder="Subject" required>
-                    </div>
-                    <div id="support-field" class="hidden-field">
-                        <input type="text" placeholder="Issue Description" required>
-                    </div>
-                    <textarea id="message-field" placeholder="Your Message" required></textarea>
-                    <button type="submit" class="btn">Send Message</button>
-                </form>
-            </div>
-            <div class="contact-details fade-in" style="animation-delay: 0.5s;">
-                <h3>Contact Details</h3>
-                <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <a href="mailto:hello@kode.dev">hello@kode.dev</a></p>
-                <p><i class="fas fa-phone"></i> <strong>Phone:</strong> +1 (555) 123-4567</p>
-                <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> 123 Innovation Drive, Tech City, USA</p>
-                <p><i class="fas fa-clock"></i> <strong>Hours:</strong> Mon-Fri, 9 AM - 6 PM</p>
+        <div class="contact-layout">
+          <div class="contact-form-wrapper">
+              <h3 class="fade-in">Send Us a Message</h3>
+              <form id="contact-form" class="contact-form">
+                  <div class="form-row">
+                      <input type="text" placeholder="Your Name" required>
+                      <input type="email" placeholder="Your Email" required>
+                  </div>
+                  <select id="contact-type" onchange="updateFormFields()" required>
+                      <option value="" disabled selected>Select a Reason for Contact</option>
+                      <option value="quote">Request a Quote</option>
+                      <option value="question">I Have a Question</option>
+                      <option value="support">Technical Support</option>
+                      <option value="other">Other</option>
+                  </select>
+                  <div id="quote-field" class="hidden-field">
+                      <textarea placeholder="Describe your project (e.g., website, app, AI solution)" required></textarea>
+                  </div>
+                  <div id="question-field" class="hidden-field">
+                      <input type="text" placeholder="Subject" required>
+                  </div>
+                  <div id="support-field" class="hidden-field">
+                      <input type="text" placeholder="Issue Description" required>
+                  </div>
+                  <textarea id="message-field" placeholder="Your Message" required></textarea>
+                  <button type="submit" class="contact-btn">Send Message</button>
+              </form>
+          </div>
+            <div class="contact-details-wrapper">
+                <h3 class="fade-in">Contact Details</h3>
+                <div class="contact-details">
+                    <p class="fade-in"><i class="fas fa-envelope"></i> <strong>Email:</strong> <a href="mailto:hello@kode.dev">hello@kode.dev</a></p>
+                    <p class="fade-in"><i class="fas fa-phone"></i> <strong>Phone:</strong> +1 (555) 123-4567</p>
+                    <p class="fade-in"><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> 123 Innovation Drive, Tech City, USA</p>
+                    <p class="fade-in"><i class="fas fa-clock"></i> <strong>Hours:</strong> Mon-Fri, 9 AM - 6 PM</p>
+                </div>
             </div>
         </div>
-        <div class="contact-map fade-in" style="animation-delay: 0.6s;">
+        <!-- Contact Section (continued) -->
+        <div class="contact-map">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019202013682!2d-122.4194156846814!3d37.77492927975971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808f5c2b7b1b%3A0x9b6c8b6b6b6c8b6b!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2sus!4v1630000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </div>
@@ -2136,24 +2687,31 @@
             <a href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#why-choose-us">Why Us</a>
-            <a href="#capabilities">Capabilities</a>
             <a href="#services">Services</a>
             <a href="#showreel">Showreel</a>
             <a href="#process">Process</a>
             <a href="#contact">Contact</a>
         </div>
         <div class="footer-column">
+            <h3>Careers</h3>
+            <a href="careers.html#frontend">Frontend Developer</a>
+            <a href="careers.html#backend">Backend Engineer</a>
+            <a href="careers.html#ai">AI Specialist</a>
+            <a href="careers.html#uiux">UI/UX Designer</a>
+            <a href="careers.html#devops">DevOps Engineer</a>
+        </div>
+        <div class="footer-column">
             <h3>Contact</h3>
             <a href="mailto:hello@kode.dev">hello@kode.dev</a>
-            <p>+1 (555) 123-4567</p>
+            <a href="tel:+15551234567">+1 (555) 123-4567</a>
             <p>123 Innovation Drive, Tech City, USA</p>
         </div>
         <div class="footer-column footer-newsletter">
             <h3>Newsletter</h3>
-            <p>Stay updated with our latest projects and tech insights.</p>
+            <p>Stay updated with the latest tech trends.</p>
             <form>
                 <input type="email" placeholder="Your Email" required>
-                <button type="submit" class="btn">Subscribe</button>
+                <button type="submit" class="btn footer-btn">Subscribe</button>
             </form>
         </div>
     </div>
@@ -2162,190 +2720,188 @@
     </div>
 </footer>
 
+<!-- JavaScript -->
 <script>
-        // Cookie Functions
-        function setCookie(name, value, days) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            const expires = "expires=" + date.toUTCString();
-            document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    // Loader: Disappear after 1.5 seconds
+    setTimeout(() => {
+        const loader = document.querySelector('.loader');
+        if (loader) {
+            loader.classList.add('hidden');
         }
+    }, 1500);
 
-        function getCookie(name) {
-            const nameEQ = name + "=";
-            const ca = document.cookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-            }
-            return null;
-        }
-
-        // Mode Toggle with Cookies
-        function toggleMode() {
-            document.body.classList.toggle('light-mode');
-            const isLight = document.body.classList.contains('light-mode');
-            setCookie('theme', isLight ? 'light' : 'dark', 365);
-        }
-
-        // Apply saved theme and hide loader
-        window.onload = () => {
-            const theme = getCookie('theme');
-            if (theme === 'light') {
-                document.body.classList.add('light-mode');
-                document.querySelector('.switch input').checked = true;
-            }
-            setTimeout(() => {
-                document.querySelector('.loader').classList.add('hidden');
-            }, 1000);
-        };
-
-        // Hamburger Menu
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.querySelector('i').classList.toggle('fa-bars');
-            hamburger.querySelector('i').classList.toggle('fa-times');
-        });
-
-        // Close hamburger menu when a link is clicked
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                hamburger.querySelector('i').classList.remove('fa-times');
-                hamburger.querySelector('i').classList.add('fa-bars');
-            });
-        });
-
-        // Navigation Active State on Scroll with Intersection Observer
-        const sections = document.querySelectorAll('section');
-        const navLinksItems = document.querySelectorAll('.nav-links a');
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5 // Trigger when 50% of the section is visible
-        };
-
-        const observerCallback = (entries) => {
-            entries.forEach(entry => {
+    // Fade-in on Scroll for Text Elements
+    const fadeInElements = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    // Remove active class from all links
-                    navLinksItems.forEach(link => link.classList.remove('active'));
-                    // Add active class to the corresponding link
-                    const id = entry.target.getAttribute('id');
-                    const activeLink = document.querySelector(`.nav-links a[href="#${id}"]`);
-                    if (activeLink) {
-                        activeLink.classList.add('active');
-                    }
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
             });
-        };
+        },
+        { threshold: 0.1, rootMargin: '0px' }
+    );
 
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-        sections.forEach(section => observer.observe(section));
+    fadeInElements.forEach((el) => observer.observe(el));
 
-        // Fallback for when scrolling between sections
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= sectionTop - sectionHeight * 0.5) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinksItems.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').slice(1) === current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Stats Counter Animation
-        const stats = document.querySelectorAll('.stat-item h3');
-        const statsSection = document.querySelector('#stats');
-        let hasAnimated = false;
-
-        const animateStats = () => {
-            if (hasAnimated) return;
-            stats.forEach(stat => {
-                const target = parseInt(stat.getAttribute('data-count'));
-                let count = 0;
-                const increment = target / 50; // Adjust speed of animation
-                const updateCount = () => {
-                    count += increment;
-                    if (count >= target) {
-                        stat.textContent = target + (stat.textContent.includes('%') ? '%' : '+');
-                        return;
-                    }
-                    stat.textContent = Math.ceil(count) + (stat.textContent.includes('%') ? '%' : '+');
-                    requestAnimationFrame(updateCount);
-                };
-                updateCount();
-            });
-            hasAnimated = true;
-        };
-
-        const statsObserver = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                animateStats();
+    // Fallback for fade-in
+    setTimeout(() => {
+        fadeInElements.forEach((el) => {
+            if (!el.classList.contains('visible')) {
+                el.classList.add('visible');
             }
-        }, { threshold: 0.5 });
-
-        statsSection && statsObserver.observe(statsSection);
-
-        // Contact Form Dynamic Fields
-        function updateFormFields() {
-            const contactType = document.getElementById('contact-type').value;
-            const quoteField = document.getElementById('quote-field');
-            const questionField = document.getElementById('question-field');
-            const supportField = document.getElementById('support-field');
-            const messageField = document.getElementById('message-field');
-
-            // Hide all conditional fields
-            quoteField.classList.add('hidden-field');
-            questionField.classList.add('hidden-field');
-            supportField.classList.add('hidden-field');
-
-            // Show relevant field based on selection
-            if (contactType === 'quote') {
-                quoteField.classList.remove('hidden-field');
-                messageField.placeholder = "Additional details (optional)";
-            } else if (contactType === 'question') {
-                questionField.classList.remove('hidden-field');
-                messageField.placeholder = "Your Question";
-            } else if (contactType === 'support') {
-                supportField.classList.remove('hidden-field');
-                messageField.placeholder = "Describe the issue in detail";
-            } else {
-                messageField.placeholder = "Your Message";
-            }
-        }
-
-        // Form Submission (Basic Example)
-        const contactForm = document.getElementById('contact-form');
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            contactForm.reset();
-            updateFormFields();
         });
+    }, 10000);
 
-        // Smooth Scroll for Hero Arrow
-        document.querySelector('.hero-arrow').addEventListener('click', (e) => {
+    // Stats Counter
+    const statItems = document.querySelectorAll('.stat-item h3');
+    const countObserver = new IntersectionObserver(
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const finalCount = parseInt(target.getAttribute('data-count'));
+                    let count = 0;
+                    const increment = finalCount / 50;
+                    const updateCount = () => {
+                        count += increment;
+                        if (count >= finalCount) {
+                            target.textContent = finalCount + (target.textContent.includes('%') ? '%' : '+');
+                        } else {
+                            target.textContent = Math.ceil(count) + (target.textContent.includes('%') ? '%' : '+');
+                            requestAnimationFrame(updateCount);
+                        }
+                    };
+                    updateCount();
+                    countObserver.unobserve(target);
+                }
+            });
+        },
+        { threshold: 0.5 }
+    );
+
+    statItems.forEach((item) => countObserver.observe(item));
+
+    // Navbar Active Link and Smooth Scroll with Offset
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 80) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach((link) => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Smooth Scroll with Offset for Navbar Height
+    navLinks.forEach((link) => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-            const targetId = e.currentTarget.getAttribute('href').slice(1);
+            const targetId = link.getAttribute('href').substring(1);
             const targetSection = document.getElementById(targetId);
+            const navbarHeight = window.innerWidth <= 768 ? 60 : 80; // Adjust based on screen size
+            const offsetTop = targetSection.offsetTop - navbarHeight;
             window.scrollTo({
-                top: targetSection.offsetTop - 80, // Adjust for navbar height
+                top: offsetTop,
                 behavior: 'smooth'
             });
         });
-    </script>
+    });
+
+    // Local Time Display
+    const localTime = document.querySelector('.local-time');
+    const updateLocalTime = () => {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        localTime.textContent = `[${hours}:${minutes}]`;
+    };
+    updateLocalTime();
+    setInterval(updateLocalTime, 1000);
+
+    // Hamburger Menu
+    const hamburger = document.querySelector('.hamburger');
+    const navLinksContainer = document.querySelector('.nav-links');
+    let isClosing = false;
+
+    hamburger.addEventListener('click', () => {
+        if (navLinksContainer.classList.contains('active') && !isClosing) {
+            isClosing = true;
+            navLinksContainer.classList.add('closing');
+            document.body.classList.remove('nav-open');
+            setTimeout(() => {
+                navLinksContainer.classList.remove('active');
+                navLinksContainer.classList.remove('closing');
+                isClosing = false;
+            }, 300);
+        } else if (!navLinksContainer.classList.contains('active')) {
+            navLinksContainer.classList.add('active');
+            document.body.classList.add('nav-open');
+        }
+    });
+
+    // Close Mobile Nav on Link Click
+    navLinksContainer.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+            if (navLinksContainer.classList.contains('active') && !isClosing) {
+                isClosing = true;
+                navLinksContainer.classList.add('closing');
+                document.body.classList.remove('nav-open');
+                setTimeout(() => {
+                    navLinksContainer.classList.remove('active');
+                    navLinksContainer.classList.remove('closing');
+                    isClosing = false;
+                }, 300);
+            }
+        });
+    });
+
+    // Contact Form Dynamic Fields
+    function updateFormFields() {
+        const contactType = document.getElementById('contact-type').value;
+        const quoteField = document.getElementById('quote-field');
+        const questionField = document.getElementById('question-field');
+        const supportField = document.getElementById('support-field');
+        const messageField = document.getElementById('message-field');
+
+        // Hide all conditional fields
+        quoteField.classList.add('hidden-field');
+        questionField.classList.add('hidden-field');
+        supportField.classList.add('hidden-field');
+        messageField.classList.remove('hidden-field');
+
+        // Show relevant field based on selection
+        if (contactType === 'quote') {
+            quoteField.classList.remove('hidden-field');
+            messageField.placeholder = 'Additional Details (optional)';
+        } else if (contactType === 'question') {
+            questionField.classList.remove('hidden-field');
+            messageField.placeholder = 'Your Question';
+        } else if (contactType === 'support') {
+            supportField.classList.remove('hidden-field');
+            messageField.placeholder = 'Describe Your Issue';
+        } else {
+            messageField.placeholder = 'Your Message';
+        }
+    }
+
+    // Form Submission (Prevent Default for Demo)
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Form submitted! (This is a demo)');
+    });
+</script>
+
 </body>
 </html>
