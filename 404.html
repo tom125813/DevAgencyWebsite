@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | KODE</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/logo.ico">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Mono&display=swap">
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Inline CSS for 404-specific styles -->
+    <style>
+        /* Reset default margins and ensure full viewport height */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden; /* Prevent any scrolling */
+        }
+
+        /* 404 Page Styles */
+        .error-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%); /* Subtle gradient background */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Subtle radial gradient overlay for depth */
+        .error-page::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .error-page > * {
+            position: relative;
+            z-index: 1; /* Ensure content is above the gradient overlay */
+        }
+
+        .error-page .logo {
+            margin-bottom: 20px; /* Adjusted space since "404" is removed */
+            position: relative;
+            display: inline-block;
+            animation: glitch 2s linear infinite;
+        }
+
+        .error-page .logo img {
+            width: 220px; /* Kept the same size as before */
+            height: 220px;
+        }
+
+        /* Glitch Animation */
+        @keyframes glitch {
+            2%, 64% {
+                transform: translate(2px, 0) skew(0deg);
+            }
+            4%, 60% {
+                transform: translate(-2px, 0) skew(0deg);
+            }
+            62% {
+                transform: translate(0, 0) skew(5deg);
+            }
+        }
+
+        .error-page p {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            color: #00FF88;
+            margin: 30px 0; /* Space to push button lower */
+            max-width: 400px; /* Limit width for better readability */
+            position: relative;
+            display: inline-block;
+        }
+
+        .error-page .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid #00FF88;
+            border-radius: 50px;
+            color: #00FF88;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            animation-delay: 1s; /* Slight delay for staggered effect */
+        }
+
+        .error-page .btn i {
+            margin-left: 10px; /* Space between text and arrow */
+            font-size: 16px;
+        }
+
+        .error-page .btn:hover {
+            background: #00FF88;
+            color: #0A0A0A;
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        }
+
+        .error-page .btn:hover i {
+            color: #0A0A0A; /* Ensure arrow color matches text on hover */
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .error-page .logo img {
+                width: 180px; /* Adjusted for mobile */
+                height: 180px;
+            }
+
+            .error-page p {
+                font-size: 16px;
+                margin: 20px 0;
+                max-width: 300px;
+            }
+
+            .error-page .btn {
+                padding: 10px 25px;
+                font-size: 12px;
+            }
+
+            .error-page .btn i {
+                font-size: 14px;
+            }
+
+            .error-page::before {
+                width: 300px;
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-page">
+        <a href="index.html" class="logo">
+            <img src="images/logo.png" alt="KODE Logo">
+        </a>
+        <p>The page you’re looking for might have been removed, renamed, or is temporarily unavailable.</p>
+        <a href="index.html" class="btn">
+            Back to Home
+            <i class="fas fa-arrow-right-long"></i>
+        </a>
+    </div>
+</body>
+</html>

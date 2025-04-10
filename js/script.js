@@ -1,4 +1,3 @@
-
 // Fade-in on Scroll for Text Elements
 const fadeInElements = document.querySelectorAll('.fade-in');
 const observer = new IntersectionObserver(
@@ -52,6 +51,7 @@ const countObserver = new IntersectionObserver(
 );
 
 statItems.forEach((el) => countObserver.observe(el));
+
 // Hamburger Menu
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('.nav-links');
@@ -61,21 +61,18 @@ hamburger.addEventListener('click', () => {
     isMenuOpen = !isMenuOpen;
     hamburger.classList.toggle('active', isMenuOpen);
     navLinks.classList.toggle('active', isMenuOpen);
-    document.body.classList.toggle('no-scroll', isMenuOpen);
+    document.body.classList.toggle('nav-open', isMenuOpen);
 });
 
-// Submenu toggle on mobile
-const navItems = document.querySelectorAll('.nav-item');
-navItems.forEach(item => {
-    const link = item.querySelector('a');
-    link.addEventListener('click', (e) => {
+// Close mobile nav when a main nav link is clicked
+const mainNavLinks = document.querySelectorAll('.nav-links > a, .nav-links .nav-item > a');
+mainNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
         if (window.innerWidth <= 768) {
-            e.preventDefault();
-            const isActive = item.classList.contains('active');
-            navItems.forEach(i => i.classList.remove('active'));
-            if (!isActive) {
-                item.classList.add('active');
-            }
+            isMenuOpen = false;
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.classList.remove('nav-open');
         }
     });
 });
@@ -86,7 +83,7 @@ window.addEventListener('resize', () => {
         isMenuOpen = false;
         hamburger.classList.remove('active');
         navLinks.classList.remove('active');
-        document.body.classList.remove('no-scroll');
+        document.body.classList.remove('nav-open');
     }
 });
 
@@ -186,4 +183,23 @@ contactForm.addEventListener('submit', (e) => {
     contactForm.reset();
     document.getElementById('contact-type').value = '';
     updateFormFields();
+});
+
+// Why Choose Us Accordion on Mobile
+const whyChooseUsItems = document.querySelectorAll('.why-choose-us-item');
+whyChooseUsItems.forEach(item => {
+    const header = item.querySelector('.why-choose-us-header');
+    header.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            const isActive = item.classList.contains('active');
+            // Close all other items
+            whyChooseUsItems.forEach(i => {
+                if (i !== item) {
+                    i.classList.remove('active');
+                }
+            });
+            // Toggle the clicked item
+            item.classList.toggle('active', !isActive);
+        }
+    });
 });

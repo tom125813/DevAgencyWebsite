@@ -3,24 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KODE - Cutting-Edge Development Agency</title>
+
+    <!-- Page Title -->
+    <title>Web & App Development for Businesses | KODE</title>
+
+    <!-- Meta Description -->
+    <meta name="description" content="KODE offers cutting-edge web, app, and AI development services. Transform your business with innovative tech solutions. Contact us today!">
+
+    <!-- Keywords (Optional but Useful for Some Search Engines) -->
+    <meta name="keywords" content="web development, app development, AI solutions, KODE, tech solutions, innovative technology">
+
+    <!-- Robots Tag -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical URL -->
+    <meta name="canonical" content="https://www.kode.dev/">
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Web & App Development for Businesses | KODE">
+    <meta property="og:description" content="KODE offers cutting-edge web, app, and AI development services. Transform your business with innovative tech solutions. Contact us today!">
+    <meta property="og:image" content="https://www.kode.dev/images/logo.png">
+    <meta property="og:url" content="https://www.kode.dev/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="KODE">
+
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Web & App Development for Businesses | KODE">
+    <meta name="twitter:description" content="KODE offers cutting-edge web, app, and AI development services. Transform your business with innovative tech solutions. Contact us today!">
+    <meta name="twitter:image" content="https://www.kode.dev/images/logo.png">
+
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/png" href="images/logo.ico">
+    <link rel="apple-touch-icon" href="images/logo.png">
+
+    <!-- Existing Stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- Loader -->
-    <!-- <div class="loader">
-        <div class="loader-text">
-            <h1>KODE</h1>
-            <p>Building the Future</p>
-        </div>
-        <div class="spinner"></div>
-    </div> -->
-
     <!-- Navbar -->
     <nav class="navbar">
-            <div class="logo">KODE</div>
+        <div class="navbar-container">
+            <a href="#home" class="logo">
+                <img src="images/logo.png" alt="KODE Logo">
+            </a>
             <div class="nav-links">
                 <a href="#home" class="active">Home</a>
                 <div class="nav-item">
@@ -50,7 +78,8 @@
                 <span></span>
                 <span></span>
             </div>
-        </nav>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -109,18 +138,33 @@
             <div class="why-choose-us-grid">
                 <div class="why-choose-us-item">
                     <i class="fas fa-check-circle"></i>
-                    <h3 class="fade-in">Friction-Free Process</h3>
-                    <p class="fade-in">Our streamlined workflow ensures a seamless experience from start to finish, with clear communication and no delays.</p>
+                    <div class="why-choose-us-header">
+                        <h3 class="fade-in">Friction-Free Process</h3>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <p class="fade-in why-choose-us-text">
+                        Our streamlined workflow ensures a seamless experience from start to finish, with clear communication and no delays.
+                    </p>
                 </div>
                 <div class="why-choose-us-item">
                     <i class="fas fa-tools"></i>
-                    <h3 class="fade-in">Ongoing Maintenance</h3>
-                    <p class="fade-in">Unlike freelancers who may leave your project buggy, we provide continuous support to keep your solution running smoothly.</p>
+                    <div class="why-choose-us-header">
+                        <h3 class="fade-in">Ongoing Maintenance</h3>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <p class="fade-in why-choose-us-text">
+                        Unlike freelancers who may leave your project buggy, we provide continuous support to keep your solution running smoothly.
+                    </p>
                 </div>
                 <div class="why-choose-us-item">
                     <i class="fas fa-users"></i>
-                    <h3 class="fade-in">Dedicated Team</h3>
-                    <p class="fade-in">Our team collaborates to deliver consistent quality, ensuring your project isn’t left incomplete or unsupported.</p>
+                    <div class="why-choose-us-header">
+                        <h3 class="fade-in">Dedicated Team</h3>
+                        <i class="fas fa-chevron-down chevron"></i>
+                    </div>
+                    <p class="fade-in why-choose-us-text">
+                        Our team collaborates to deliver consistent quality, ensuring your project isn’t left incomplete or unsupported.
+                    </p>
                 </div>
             </div>
         </div>
@@ -212,7 +256,7 @@
                     <div class="tech-category-grid">
                         <div class="tech-item">
                             <i class="fab fa-node-js"></i>
-                            <p class="fade-in">Node 시작.js</p>
+                            <p class="fade-in">Node.js</p>
                             <div class="tech-tooltip">Fast, scalable backend systems.</div>
                         </div>
                         <div class="tech-item">
@@ -310,26 +354,6 @@
                     <p class="fade-in">Smart automation and insights to optimize your operations.</p>
                     <a href="services/ai-integration.html" class="btn">Explore AI Solutions</a>
                 </div>
-                <!-- Temporarily commented out
-                <div class="service-item">
-                    <i class="fas fa-cloud"></i>
-                    <h3 class="fade-in">Cloud Services</h3>
-                    <p class="fade-in">Scalable cloud solutions for efficiency and growth.</p>
-                    <a href="services/cloud-services.html" class="btn">Explore Cloud Solutions</a>
-                </div>
-                <div class="service-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <h3 class="fade-in">Cybersecurity</h3>
-                    <p class="fade-in">Protect your digital assets with top-tier security.</p>
-                    <a href="services/cybersecurity.html" class="btn">Explore Security Solutions</a>
-                </div>
-                <div class="service-item">
-                    <i class="fas fa-chart-line"></i>
-                    <h3 class="fade-in">Data Analytics</h3>
-                    <p class="fade-in">Turn data into actionable insights for your business.</p>
-                    <a href="services/data-analytics.html" class="btn">Explore Analytics Solutions</a>
-                </div>
-                -->
             </div>
         </div>
     </section>
@@ -344,25 +368,28 @@
             <p class="fade-in">
                 See how we’ve helped businesses like yours succeed with our innovative solutions.
             </p>
-            <div class="showreel-grid">
-                <div class="showreel-item">
-                    <img src="https://placehold.co/300x150" alt="Breezy">
-                    <h3 class="fade-in">Breezy</h3>
-                    <p class="fade-in">A dashboard for automating social media, saving time and costs with AI-driven workflows.</p>
-                    <a href="project-breezy.html">View Project</a>
+            <div class="showreel-grid-wrapper">
+                <div class="showreel-grid">
+                    <div class="showreel-item">
+                        <img src="https://placehold.co/300x150" alt="Breezy">
+                        <h3 class="fade-in">Breezy</h3>
+                        <p class="fade-in">A dashboard for automating social media, saving time and costs with AI-driven workflows.</p>
+                        <a href="project-breezy.html">View Project</a>
+                    </div>
+                    <div class="showreel-item">
+                        <img src="https://placehold.co/300x150" alt="Tower of Bedrock">
+                        <h3 class="fade-in">Tower of Bedrock</h3>
+                        <p class="fade-in">A vibrant site for a gaming community, built for engagement and scalability.</p>
+                        <a href="project-tob.html">View Project</a>
+                    </div>
+                    <div class="showreel-item">
+                        <img src="https://placehold.co/300x150" alt="Bespoke Deliveries">
+                        <h3 class="fade-in">Bespoke Deliveries</h3>
+                        <p class="fade-in">A premium delivery service with a seamless user experience and real-time tracking.</p>
+                        <a href="project-bespoke.html">View Project</a>
+                    </div>
                 </div>
-                <div class="showreel-item">
-                    <img src="https://placehold.co/300x150" alt="Tower of Bedrock">
-                    <h3 class="fade-in">Tower of Bedrock</h3>
-                    <p class="fade-in">A vibrant site for a gaming community, built for engagement and scalability.</p>
-                    <a href="project-tob.html">View Project</a>
-                </div>
-                <div class="showreel-item">
-                    <img src="https://placehold.co/300x150" alt="Bespoke Deliveries">
-                    <h3 class="fade-in">Bespoke Deliveries</h3>
-                    <p class="fade-in">A premium delivery service with a seamless user experience and real-time tracking.</p>
-                    <a href="project-bespoke.html">View Project</a>
-                </div>
+                <div class="scroll-hint">Swipe to see more <i class="fas fa-arrow-right"></i></div>
             </div>
         </div>
     </section>
@@ -495,6 +522,7 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="section-header">Contact</div>
         <div class="contact-content">
@@ -546,7 +574,7 @@
         </div>
     </section>
 
-
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-column">
