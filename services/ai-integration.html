@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Integration - KODE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/subpage-styles.css">
+    <style>
+        .flowchart {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .flowchart::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: rgba(0, 255, 136, 0.3);
+        }
+
+        .flowchart-node {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .flowchart-node.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .flowchart-node:nth-child(odd) {
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+
+        .flowchart-node:nth-child(even) {
+            flex-direction: row-reverse;
+            justify-content: flex-start;
+        }
+
+        .flowchart-content {
+            width: 45%;
+            padding: 20px;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .flowchart-content:hover {
+            background: rgba(0, 255, 136, 0.3);
+            transform: scale(1.02);
+        }
+
+        .flowchart-content h4 {
+            color: #00ff88;
+            font-family: 'Space Mono', monospace;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .flowchart-content h4 i {
+            font-size: 20px;
+        }
+
+        .flowchart-content p {
+            display: none;
+        }
+
+        .flowchart-content.active p {
+            display: block;
+        }
+
+        .flowchart-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 2px;
+            background: #00ff88;
+        }
+
+        .flowchart-node:nth-child(odd) .flowchart-content::before {
+            right: -20px;
+        }
+
+        .flowchart-node:nth-child(even) .flowchart-content::before {
+            left: -20px;
+        }
+
+        .flowchart-dot {
+            width: 16px;
+            height: 16px;
+            background: #00ff88;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="subpage-styles">
+    <nav class="navbar">
+        <div class="logo">KODE</div>
+        <div class="nav-links">
+            <a href="../index.html#home">Home</a>
+            <div class="nav-item">
+                <a href="../index.html#about">About</a>
+                <div class="submenu">
+                    <a href="../about/team.html">Meet the Team</a>
+                    <a href="../about/mission.html">Our Mission</a>
+                    <a href="../about/values.html">Our Values</a>
+                </div>
+            </div>
+            <a href="../index.html#why-choose-us">Why Us</a>
+            <div class="nav-item">
+                <a href="../index.html#services" class="active">Services</a>
+                <div class="submenu">
+                    <a href="web-development.html">Web Solutions</a>
+                    <a href="app-development.html">App Solutions</a>
+                    <a href="ai-integration.html">AI Solutions</a>
+                </div>
+            </div>
+            <a href="../index.html#showreel">Showreel</a>
+            <a href="../index.html#process">Process</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+        <div class="local-time">[00:00]</div>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times"></i>
+        </div>
+    </nav>
+
+    <section class="about" id="ai-integration">
+        <div class="section-header">AI Integration</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h2 class="fade-in">AI Integration Solutions</h2>
+                <p class="fade-in">We integrate AI into your business processes to automate tasks, gain insights, and enhance decision-making. Our AI solutions are tailored to your needs, delivering measurable results.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="section-header">Use Case Demo</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h3 class="fade-in">How AI Transforms Businesses</h3>
+                <p class="fade-in">Click on each step to see how AI can be applied in a real-world scenario, such as optimizing a supply chain.</p>
+                <div class="flowchart">
+                    <div class="flowchart-node">
+                        <div class="flowchart-content">
+                            <h4><i class="fas fa-database"></i> Data Collection</h4>
+                            <p>Gather data from your supply chain, including inventory levels, shipping times, and demand forecasts.</p>
+                        </div>
+                        <div class="flowchart-dot"></div>
+                    </div>
+                    <div class="flowchart-node">
+                        <div class="flowchart-content">
+                            <h4><i class="fas fa-brain"></i> AI Analysis</h4>
+                            <p>Use machine learning to analyze patterns and predict future demand with high accuracy.</p>
+                        </div>
+                        <div class="flowchart-dot"></div>
+                    </div>
+                    <div class="flowchart-node">
+                        <div class="flowchart-content">
+                            <h4><i class="fas fa-cogs"></i> Automation</h4>
+                            <p>Automate inventory restocking and optimize shipping routes based on AI recommendations.</p>
+                        </div>
+                        <div class="flowchart-dot"></div>
+                    </div>
+                    <div class="flowchart-node">
+                        <div class="flowchart-content">
+                            <h4><i class="fas fa-chart-line"></i> Results</h4>
+                            <p>Reduce costs by 20%, improve delivery times by 15%, and enhance overall efficiency.</p>
+                        </div>
+                        <div class="flowchart-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="section-header">Our Expertise</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h3 class="fade-in">Why Choose KODE for AI</h3>
+                <p class="fade-in">Our AI team has extensive experience in machine learning, natural language processing, and computer vision. We’ve implemented AI solutions for industries ranging from retail to healthcare, delivering results like increased efficiency, better customer experiences, and data-driven decision-making.</p>
+                <p class="fade-in">We use tools like TensorFlow, PyTorch, and custom algorithms to build AI models that fit your specific needs. Our process includes data preparation, model training, integration, and ongoing optimization to ensure your AI solution evolves with your business.</p>
+                <p class="fade-in">Ready to harness the power of AI? Let’s explore how we can transform your operations.</p>
+            </div>
+            <div class="page-nav">
+                <a href="app-development.html" class="fade-in"><i class="fas fa-arrow-left"></i> App Development</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>KODE</h3>
+                <p>Your partner in digital innovation, delivering cutting-edge solutions with speed and quality.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Navigation</h3>
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#why-choose-us">Why Us</a>
+                <a href="../index.html#services">Services</a>
+                <a href="../index.html#showreel">Showreel</a>
+                <a href="../index.html#process">Process</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h3>Careers</h3>
+                <a href="../careers.html#frontend">Frontend Developer</a>
+                <a href="../careers.html#backend">Backend Engineer</a>
+                <a href="../careers.html#ai">AI Specialist</a>
+                <a href="../careers.html#uiux">UI/UX Designer</a>
+                <a href="../careers.html#devops">DevOps Engineer</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <a href="mailto:hello@kode.dev">hello@kode.dev</a>
+                <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                <p>123 Innovation Drive, Tech City, USA</p>
+            </div>
+            <div class="footer-column footer-newsletter">
+                <h3>Newsletter</h3>
+                <p>Stay updated with the latest tech trends.</p>
+                <form>
+                    <input type="email" placeholder="Your Email" required>
+                    <button type="submit" class="footer-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 KODE. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        const flowchartNodes = document.querySelectorAll('.flowchart-node');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.3 });
+
+        flowchartNodes.forEach(node => {
+            observer.observe(node);
+            node.querySelector('.flowchart-content').addEventListener('click', () => {
+                flowchartNodes.forEach(n => n.querySelector('.flowchart-content').classList.remove('active'));
+                node.querySelector('.flowchart-content').classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

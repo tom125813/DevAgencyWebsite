@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Development - KODE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/subpage-styles.css">
+    <style>
+        .toggle-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .toggle-btn {
+            padding: 10px 20px;
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Space Mono', monospace;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-btn.active {
+            background: rgba(0, 255, 136, 0.3);
+        }
+
+        .platform-table {
+            max-width: 900px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .platform-table.active {
+            display: block;
+        }
+
+        .platform-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .platform-table th, .platform-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            width: 50%; /* Fixed width to prevent movement */
+        }
+
+        .platform-table th {
+            background: rgba(0, 255, 136, 0.1);
+            color: #00ff88;
+            font-family: 'Space Mono', monospace;
+        }
+    </style>
+</head>
+<body class="subpage-styles">
+    <nav class="navbar">
+        <div class="logo">KODE</div>
+        <div class="nav-links">
+            <a href="../index.html#home">Home</a>
+            <div class="nav-item">
+                <a href="../index.html#about">About</a>
+                <div class="submenu">
+                    <a href="../about/team.html">Meet the Team</a>
+                    <a href="../about/mission.html">Our Mission</a>
+                    <a href="../about/values.html">Our Values</a>
+                </div>
+            </div>
+            <a href="../index.html#why-choose-us">Why Us</a>
+            <div class="nav-item">
+                <a href="../index.html#services" class="active">Services</a>
+                <div class="submenu">
+                    <a href="web-development.html">Web Solutions</a>
+                    <a href="app-development.html">App Solutions</a>
+                    <a href="ai-integration.html">AI Solutions</a>
+                </div>
+            </div>
+            <a href="../index.html#showreel">Showreel</a>
+            <a href="../index.html#process">Process</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+        <div class="local-time">[00:00]</div>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times"></i>
+        </div>
+    </nav>
+
+    <section class="about" id="app-development">
+        <div class="section-header">App Development</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h2 class="fade-in">App Development Solutions</h2>
+                <p class="fade-in">We create powerful, user-friendly mobile apps for iOS and Android that bring your ideas to life. Whether you need a consumer app or an enterprise solution, we deliver apps that perform and delight.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="section-header">Platform Comparison</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h3 class="fade-in">iOS vs Android Development</h3>
+                <p class="fade-in">We specialize in both iOS and Android development. Toggle between platforms to see how we approach each.</p>
+                <div class="toggle-buttons">
+                    <button class="toggle-btn active" data-target="ios">iOS</button>
+                    <button class="toggle-btn" data-target="android">Android</button>
+                </div>
+                <div class="platform-table active" id="ios">
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Language</td>
+                            <td>Swift, Objective-C</td>
+                        </tr>
+                        <tr>
+                            <td>Tools</td>
+                            <td>Xcode, TestFlight</td>
+                        </tr>
+                        <tr>
+                            <td>Design</td>
+                            <td>Human Interface Guidelines</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="platform-table" id="android">
+                    <table>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Details</th>
+                        </tr>
+                        <tr>
+                            <td>Language</td>
+                            <td>Kotlin, Java</td>
+                        </tr>
+                        <tr>
+                            <td>Tools</td>
+                            <td>Android Studio, Gradle</td>
+                        </tr>
+                        <tr>
+                            <td>Design</td>
+                            <td>Material Design</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="section-header">Our Process</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h3 class="fade-in">How We Build Apps</h3>
+                <p class="fade-in">Our app development process is streamlined for success. We begin with discovery and planning, followed by UI/UX design, development, and testing. We use cross-platform frameworks like React Native when appropriate, or native development for optimal performance.</p>
+                <p class="fade-in">We prioritize user experience, ensuring your app is intuitive and engaging. Our team also focuses on performance optimization, security, and scalability, so your app can grow with your business. Post-launch, we provide maintenance and updates to keep your app running smoothly.</p>
+                <p class="fade-in">Let’s create an app that your users will love. Get in touch to start your project.</p>
+            </div>
+            <div class="page-nav">
+                <a href="web-development.html" class="fade-in"><i class="fas fa-arrow-left"></i> Web Development</a>
+                <a href="ai-integration.html" class="fade-in">AI Integration <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>KODE</h3>
+                <p>Your partner in digital innovation, delivering cutting-edge solutions with speed and quality.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Navigation</h3>
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#why-choose-us">Why Us</a>
+                <a href="../index.html#services">Services</a>
+                <a href="../index.html#showreel">Showreel</a>
+                <a href="../index.html#process">Process</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h3>Careers</h3>
+                <a href="../careers.html#frontend">Frontend Developer</a>
+                <a href="../careers.html#backend">Backend Engineer</a>
+                <a href="../careers.html#ai">AI Specialist</a>
+                <a href="../careers.html#uiux">UI/UX Designer</a>
+                <a href="../careers.html#devops">DevOps Engineer</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <a href="mailto:hello@kode.dev">hello@kode.dev</a>
+                <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                <p>123 Innovation Drive, Tech City, USA</p>
+            </div>
+            <div class="footer-column footer-newsletter">
+                <h3>Newsletter</h3>
+                <p>Stay updated with the latest tech trends.</p>
+                <form>
+                    <input type="email" placeholder="Your Email" required>
+                    <button type="submit" class="footer-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 KODE. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        const toggleButtons = document.querySelectorAll('.toggle-btn');
+        const platformTables = document.querySelectorAll('.platform-table');
+
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                toggleButtons.forEach(btn => btn.classList.remove('active'));
+                platformTables.forEach(table => table.classList.remove('active'));
+
+                button.classList.add('active');
+                document.getElementById(button.dataset.target).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

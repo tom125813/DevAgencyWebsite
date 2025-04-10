@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Values - KODE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/subpage-styles.css">
+    <style>
+        .value-card {
+            perspective: 1000px;
+            height: 300px;
+        }
+
+        .value-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s ease;
+            transform-style: preserve-3d;
+        }
+
+        .value-card:hover .value-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .value-card-front, .value-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .value-card-back {
+            transform: rotateY(180deg);
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .value-card-front h4, .value-card-back h4 {
+            color: #00ff88;
+            font-family: 'Space Mono', monospace;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body class="subpage-styles">
+    <nav class="navbar">
+        <div class="logo">KODE</div>
+        <div class="nav-links">
+            <a href="../index.html#home">Home</a>
+            <div class="nav-item">
+                <a href="../index.html#about" class="active">About</a>
+                <div class="submenu">
+                    <a href="team.html">Meet the Team</a>
+                    <a href="mission.html">Our Mission</a>
+                    <a href="values.html">Our Values</a>
+                </div>
+            </div>
+            <a href="../index.html#why-choose-us">Why Us</a>
+            <div class="nav-item">
+                <a href="../index.html#services">Services</a>
+                <div class="submenu">
+                    <a href="../services/web-development.html">Web Solutions</a>
+                    <a href="../services/app-development.html">App Solutions</a>
+                    <a href="../services/ai-integration.html">AI Solutions</a>
+                </div>
+            </div>
+            <a href="../index.html#showreel">Showreel</a>
+            <a href="../index.html#process">Process</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+        <div class="local-time">[00:00]</div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <section class="about" id="values">
+        <div class="section-header">Our Values</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h2 class="fade-in">Our Values</h2>
+                <p class="fade-in">At KODE, our values define who we are and how we operate. They guide every decision we make and every project we undertake, ensuring we deliver exceptional results while staying true to our principles.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="section-header">Core Principles</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h3 class="fade-in">What We Stand For</h3>
+                <p class="fade-in">Our values are the foundation of our success. Hover over each card to learn more about how we embody these principles in our work.</p>
+                <div class="about-grid">
+                    <div class="about-grid-item value-card">
+                        <div class="value-card-inner">
+                            <div class="value-card-front">
+                                <h4>Quality</h4>
+                                <p>We never compromise on quality, ensuring every project meets the highest standards.</p>
+                            </div>
+                            <div class="value-card-back">
+                                <h4>Quality in Action</h4>
+                                <p>From rigorous testing to pixel-perfect designs, we deliver solutions that stand the test of time.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-grid-item value-card">
+                        <div class="value-card-inner">
+                            <div class="value-card-front">
+                                <h4>Speed</h4>
+                                <p>We work efficiently to deliver projects on time without sacrificing quality.</p>
+                            </div>
+                            <div class="value-card-back">
+                                <h4>Speed in Action</h4>
+                                <p>Our agile methodology ensures rapid development cycles and quick turnarounds.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-grid-item value-card">
+                        <div class="value-card-inner">
+                            <div class="value-card-front">
+                                <h4>Innovation</h4>
+                                <p>We push boundaries, adopting the latest technologies to create cutting-edge solutions.</p>
+                            </div>
+                            <div class="value-card-back">
+                                <h4>Innovation in Action</h4>
+                                <p>We’ve pioneered AI-driven tools and modern web frameworks to stay ahead of the curve.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="section-header">Living Our Values</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h3 class="fade-in">How We Apply Our Values</h3>
+                <p class="fade-in">Our values aren’t just words—they’re the principles we live by every day. From the way we collaborate with clients to how we approach challenges, quality, speed, and innovation are at the core of everything we do.</p>
+                <p class="fade-in">For example, our commitment to quality means we conduct thorough testing at every stage of development, ensuring our solutions are robust and reliable. Our focus on speed allows us to deliver projects ahead of schedule, giving our clients a competitive edge. And our drive for innovation ensures we’re always exploring new technologies to bring fresh ideas to the table.</p>
+                <p class="fade-in">These values have earned us the trust of clients worldwide, and we’re proud to uphold them in every project we take on.</p>
+            </div>
+            <div class="page-nav">
+                <a href="mission.html" class="fade-in"><i class="fas fa-arrow-left"></i> Our Mission</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>KODE</h3>
+                <p>Your partner in digital innovation, delivering cutting-edge solutions with speed and quality.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Navigation</h3>
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#why-choose-us">Why Us</a>
+                <a href="../index.html#services">Services</a>
+                <a href="../index.html#showreel">Showreel</a>
+                <a href="../index.html#process">Process</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h3>Careers</h3>
+                <a href="../careers.html#frontend">Frontend Developer</a>
+                <a href="../careers.html#backend">Backend Engineer</a>
+                <a href="../careers.html#ai">AI Specialist</a>
+                <a href="../careers.html#uiux">UI/UX Designer</a>
+                <a href="../careers.html#devops">DevOps Engineer</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <a href="mailto:hello@kode.dev">hello@kode.dev</a>
+                <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                <p>123 Innovation Drive, Tech City, USA</p>
+            </div>
+            <div class="footer-column footer-newsletter">
+                <h3>Newsletter</h3>
+                <p>Stay updated with the latest tech trends.</p>
+                <form>
+                    <input type="email" placeholder="Your Email" required>
+                    <button type="submit" class="footer-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 KODE. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

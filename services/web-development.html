@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development - KODE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/subpage-styles.css">
+    <style>
+        .carousel {
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            animation: scroll 20s linear infinite;
+        }
+
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+
+        .carousel-item {
+            flex: 0 0 200px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 255, 136, 0.1);
+            margin: 0 10px;
+            border-radius: 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 18px;
+            color: #00ff88;
+            gap: 10px;
+        }
+
+        .carousel-item i {
+            font-size: 24px;
+            color: #00ff88;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body class="subpage-styles">
+    <nav class="navbar">
+        <div class="logo">KODE</div>
+        <div class="nav-links">
+            <a href="../index.html#home">Home</a>
+            <div class="nav-item">
+                <a href="../index.html#about">About</a>
+                <div class="submenu">
+                    <a href="../about/team.html">Meet the Team</a>
+                    <a href="../about/mission.html">Our Mission</a>
+                    <a href="../about/values.html">Our Values</a>
+                </div>
+            </div>
+            <a href="../index.html#why-choose-us">Why Us</a>
+            <div class="nav-item">
+                <a href="../index.html#services" class="active">Services</a>
+                <div class="submenu">
+                    <a href="web-development.html">Web Solutions</a>
+                    <a href="app-development.html">App Solutions</a>
+                    <a href="ai-integration.html">AI Solutions</a>
+                </div>
+            </div>
+            <a href="../index.html#showreel">Showreel</a>
+            <a href="../index.html#process">Process</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+        <div class="local-time">[00:00]</div>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times"></i>
+        </div>
+    </nav>
+
+    <section class="about" id="web-development">
+        <div class="section-header">Web Development</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h2 class="fade-in">Web Development Solutions</h2>
+                <p class="fade-in">We build modern, responsive, and high-performance websites that elevate your online presence. From e-commerce platforms to corporate sites, our web solutions are designed to engage users and drive results.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="section-header">Our Tech Stack</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h3 class="fade-in">Tools We Use</h3>
+                <p class="fade-in">Our web development team leverages the latest technologies to build robust and scalable websites. Hover over the carousel to pause and explore our tech stack.</p>
+                <div class="carousel">
+                    <div class="carousel-track">
+                        <div class="carousel-item"><i class="fab fa-react"></i> React</div>
+                        <div class="carousel-item"><i class="fab fa-node-js"></i> Node.js</div>
+                        <div class="carousel-item"><i class="fas fa-server"></i> Express</div>
+                        <div class="carousel-item"><i class="fas fa-database"></i> MongoDB</div>
+                        <div class="carousel-item"><i class="fab fa-js"></i> Next.js</div>
+                        <div class="carousel-item"><i class="fab fa-react"></i> React</div>
+                        <div class="carousel-item"><i class="fab fa-node-js"></i> Node.js</div>
+                        <div class="carousel-item"><i class="fas fa-server"></i> Express</div>
+                        <div class="carousel-item"><i class="fas fa-database"></i> MongoDB</div>
+                        <div class="carousel-item"><i class="fab fa-js"></i> Next.js</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="section-header">Our Approach</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h3 class="fade-in">How We Build Websites</h3>
+                <p class="fade-in">Our web development process is designed to deliver results. We start with a deep understanding of your business goals, followed by strategic planning, design, and development. We use agile methodologies to ensure flexibility and rapid delivery, while maintaining a focus on quality through rigorous testing.</p>
+                <p class="fade-in">We specialize in creating responsive websites that look great on any device, from desktops to smartphones. Our team also optimizes for performance, ensuring fast load times and seamless user experiences. Whether you need a custom CMS, an e-commerce platform, or a dynamic web app, we’ve got you covered.</p>
+                <p class="fade-in">Ready to take your online presence to the next level? Let’s build a website that stands out.</p>
+            </div>
+            <div class="page-nav">
+                <a href="app-development.html" class="fade-in">App Development <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>KODE</h3>
+                <p>Your partner in digital innovation, delivering cutting-edge solutions with speed and quality.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Navigation</h3>
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#why-choose-us">Why Us</a>
+                <a href="../index.html#services">Services</a>
+                <a href="../index.html#showreel">Showreel</a>
+                <a href="../index.html#process">Process</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h3>Careers</h3>
+                <a href="../careers.html#frontend">Frontend Developer</a>
+                <a href="../careers.html#backend">Backend Engineer</a>
+                <a href="../careers.html#ai">AI Specialist</a>
+                <a href="../careers.html#uiux">UI/UX Designer</a>
+                <a href="../careers.html#devops">DevOps Engineer</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <a href="mailto:hello@kode.dev">hello@kode.dev</a>
+                <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                <p>123 Innovation Drive, Tech City, USA</p>
+            </div>
+            <div class="footer-column footer-newsletter">
+                <h3>Newsletter</h3>
+                <p>Stay updated with the latest tech trends.</p>
+                <form>
+                    <input type="email" placeholder="Your Email" required>
+                    <button type="submit" class="footer-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 KODE. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

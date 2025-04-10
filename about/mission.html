@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Mission - KODE</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/subpage-styles.css">
+    <style>
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: rgba(0, 255, 136, 0.3);
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            position: relative;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+            justify-content: flex-start;
+        }
+
+        .timeline-content {
+            width: 45%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 2px;
+            background: #00ff88;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -20px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -20px;
+        }
+
+        .timeline-content h4 {
+            color: #00ff88;
+            font-family: 'Space Mono', monospace;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            background: #00ff88;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+    </style>
+</head>
+<body class="subpage-styles">
+    <nav class="navbar">
+        <div class="logo">KODE</div>
+        <div class="nav-links">
+            <a href="../index.html#home">Home</a>
+            <div class="nav-item">
+                <a href="../index.html#about" class="active">About</a>
+                <div class="submenu">
+                    <a href="team.html">Meet the Team</a>
+                    <a href="mission.html">Our Mission</a>
+                    <a href="values.html">Our Values</a>
+                </div>
+            </div>
+            <a href="../index.html#why-choose-us">Why Us</a>
+            <div class="nav-item">
+                <a href="../index.html#services">Services</a>
+                <div class="submenu">
+                    <a href="../services/web-development.html">Web Solutions</a>
+                    <a href="../services/app-development.html">App Solutions</a>
+                    <a href="../services/ai-integration.html">AI Solutions</a>
+                </div>
+            </div>
+            <a href="../index.html#showreel">Showreel</a>
+            <a href="../index.html#process">Process</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+        <div class="local-time">[00:00]</div>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-times"></i>
+        </div>
+    </nav>
+
+    <section class="about" id="mission">
+        <div class="section-header">Our Mission</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h2 class="fade-in">Our Mission</h2>
+                <p class="fade-in">At KODE, our mission is to empower businesses by delivering cutting-edge technology solutions that drive growth, efficiency, and innovation. We aim to be your trusted partner in navigating the digital landscape, ensuring your ideas are transformed into impactful realities.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="section-header">Our Journey</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h3 class="fade-in">How We Got Here</h3>
+                <p class="fade-in">KODE was founded with a vision to bridge the gap between technology and business needs. Over the years, we’ve grown from a small team of innovators to a powerhouse of experts, delivering solutions to clients worldwide. Here’s a look at our journey.</p>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>2015 - The Beginning</h4>
+                            <p>KODE was founded by a group of tech enthusiasts with a shared passion for innovation.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>2017 - First Major Project</h4>
+                            <p>We delivered our first enterprise-level web solution, earning recognition in the tech community.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>2019 - Expansion</h4>
+                            <p>Our team doubled in size, and we expanded our services to include app development and AI integration.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>2022 - Global Reach</h4>
+                            <p>We began serving clients internationally, with projects spanning North America, Europe, and Asia.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h4>2025 - Today</h4>
+                            <p>KODE continues to innovate, pushing the boundaries of what’s possible in tech.</p>
+                        </div>
+                        <div class="timeline-dot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="section-header">Our Commitment</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="about-content">
+            <div class="team-section">
+                <h3 class="fade-in">Empowering Your Future</h3>
+                <p class="fade-in">Our mission goes beyond delivering projects—we’re committed to empowering your business for the future. We stay ahead of industry trends, adopt the latest technologies, and ensure our solutions are scalable and sustainable. Whether you’re a startup or an enterprise, we tailor our approach to meet your unique needs.</p>
+                <p class="fade-in">We believe in building long-term partnerships. Our clients aren’t just customers; they’re collaborators. We work closely with you to understand your goals, challenges, and vision, ensuring every solution we deliver aligns with your business strategy.</p>
+                <p class="fade-in">Ready to transform your business with technology? Let’s work together to make it happen.</p>
+            </div>
+            <div class="page-nav">
+                <a href="team.html" class="fade-in"><i class="fas fa-arrow-left"></i> Meet the Team</a>
+                <a href="values.html" class="fade-in">Our Values <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>KODE</h3>
+                <p>Your partner in digital innovation, delivering cutting-edge solutions with speed and quality.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Navigation</h3>
+                <a href="../index.html#home">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#why-choose-us">Why Us</a>
+                <a href="../index.html#services">Services</a>
+                <a href="../index.html#showreel">Showreel</a>
+                <a href="../index.html#process">Process</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h3>Careers</h3>
+                <a href="../careers.html#frontend">Frontend Developer</a>
+                <a href="../careers.html#backend">Backend Engineer</a>
+                <a href="../careers.html#ai">AI Specialist</a>
+                <a href="../careers.html#uiux">UI/UX Designer</a>
+                <a href="../careers.html#devops">DevOps Engineer</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <a href="mailto:hello@kode.dev">hello@kode.dev</a>
+                <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                <p>123 Innovation Drive, Tech City, USA</p>
+            </div>
+            <div class="footer-column footer-newsletter">
+                <h3>Newsletter</h3>
+                <p>Stay updated with the latest tech trends.</p>
+                <form>
+                    <input type="email" placeholder="Your Email" required>
+                    <button type="submit" class="footer-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 KODE. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // Scroll-triggered timeline animation
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.3 });
+
+        timelineItems.forEach(item => observer.observe(item));
+    </script>
+</body>
+</html>

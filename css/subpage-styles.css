@@ -1,0 +1,83 @@
+/* Subpage-Specific Styles */
+.subpage-styles .about-content {
+    padding-top: 40px; /* Reduced from 60px */
+    padding-bottom: 40px; /* Reduced from 100px */
+}
+
+.subpage-styles .team-section {
+    margin: 40px 0; /* Reduced from 100px to match index.html spacing */
+    position: relative;
+}
+
+.subpage-styles .team-section h3 {
+    font-size: 32px;
+    color: #00ff88;
+    font-family: 'Space Mono', monospace;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.subpage-styles .team-section p {
+    font-size: 18px;
+    line-height: 1.8;
+    max-width: 900px;
+    margin: 0 auto 30px;
+    opacity: 0.9;
+}
+
+.subpage-styles .about-grid {
+    margin-bottom: 40px;
+}
+
+.subpage-styles .about-grid-item {
+    background: rgba(255, 255, 255, 0.08);
+    transition: transform 0.3s;
+}
+
+.subpage-styles .about-grid-item:hover {
+    transform: translateY(-10px); /* Lift effect only */
+}
+
+.subpage-styles .about-grid-item h3 {
+    color: #00ff88;
+    font-size: 26px;
+}
+
+.subpage-styles .about-grid-item p {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+/* Page Navigation */
+.subpage-styles .page-nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px; /* Reduced from 60px */
+}
+
+.subpage-styles .page-nav a {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(0, 255, 136, 0.1);
+    color: #00ff88;
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 16px;
+    border-radius: 8px;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.subpage-styles .page-nav a:hover {
+    background: rgba(0, 255, 136, 0.3);
+    transform: translateX(5px);
+}
+
+.subpage-styles .page-nav a i.fa-arrow-right {
+    margin-left: 12px; /* Space between text and right arrow */
+}
+
+.subpage-styles .page-nav a i.fa-arrow-left {
+    margin-right: 12px; /* Space between text and left arrow */
+}
