@@ -114,7 +114,7 @@ setInterval(scrambleText, 2000);
 
 // Typewriter Effect
 const typewriterElement = document.querySelector('.typewriter');
-const words = ['Future', 'Success', 'Innovation', 'Growth'];
+const words = ['Future', 'Success',  'Growth'];
 let wordIndex = 0;
 let charIndex = 0;
 let currentWord = '';

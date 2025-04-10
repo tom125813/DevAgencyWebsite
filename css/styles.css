@@ -1531,7 +1531,7 @@ section {
 /* Responsive Design */
 @media (max-width: 1024px) {
     .hero h1 {
-        font-size: 60px;
+        font-size: 30px;
     }
 
     .hero p {
@@ -1588,7 +1588,7 @@ section {
 
 @media (max-width: 480px) {
     .hero h1 {
-        font-size: 36px;
+        font-size: 30px;
     }
 
     .hero p {
@@ -3152,5 +3152,401 @@ section[id] {
     .contact-btn {
         padding: 12px;
         font-size: 14px;
+    }
+}
+/* About Section (Icons and Layout) */
+.about-grid-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.about-grid-item {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px; /* Limit width for first row */
+}
+
+.about-grid-item.full-width {
+    flex: 0 0 100%; /* Full width for second row */
+    max-width: none;
+}
+
+.about-grid-item i {
+    font-size: 40px;
+    color: #00ff88;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .about-grid-row {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Why Us Section (Mobile Alignment) */
+@media (max-width: 768px) {
+    .why-choose-us-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .why-choose-us-item i,
+    .why-choose-us-header h3,
+    .chevron {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .why-choose-us-item i {
+        margin-right: 10px;
+        margin-bottom: 0;
+    }
+
+    .chevron {
+        margin-left: 10px;
+    }
+}
+
+/* Achievements and Technology Expertise (Remove Bottom Margin) */
+.stat-item p,
+.tech-item p {
+    margin-bottom: 0;
+}
+
+/* Showreel Section (Mobile Scroll Fixes) */
+@media (max-width: 768px) {
+    .showreel-grid-wrapper {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        margin: 0;
+        padding: 0 20px 20px;
+    }
+
+    .showreel-grid {
+        width: fit-content;
+        scroll-behavior: smooth;
+        overflow-x: hidden; /* Prevent extra horizontal space */
+    }
+
+    .showreel-item {
+        scroll-snap-align: center;
+        flex: 0 0 280px;
+    }
+
+    /* Prevent overscroll */
+    .showreel-grid-wrapper::-webkit-scrollbar {
+        display: none; /* Optional: hide scrollbar */
+    }
+}
+
+/* Timeline and Process Overview (Learn More and Alignment) */
+.process-step .learn-more,
+.process-grid-item .learn-more {
+    color: #666; /* Slightly dark gray */
+    text-decoration: underline;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.process-step .learn-more i,
+.process-grid-item .learn-more i {
+    margin-left: 8px;
+    font-size: 14px;
+    vertical-align: middle; /* Align with text */
+}
+
+.process-step .learn-more:hover,
+.process-grid-item .learn-more:hover {
+    color: #999;
+}
+
+.process-step .learn-more:hover i,
+.process-grid-item .learn-more:hover i {
+    transform: translateX(5px);
+}
+
+/* Lower arrows in process grid */
+.process-grid-item i.fa-arrow-right {
+    vertical-align: middle;
+    position: relative;
+    top: -2px; /* Adjust as needed */
+}
+
+/* Align check icon in process overview */
+.process-benefits li i {
+    vertical-align: middle;
+    position: relative;
+    top: -2px; /* Adjust as needed */
+}
+
+/* Hide Section h2 on Mobile */
+@media (max-width: 768px) {
+    section h2 {
+        display: none;
+    }
+}
+
+/* Navbar Adjustments */
+.nav-links {
+    gap: 15px; /* Reduce gap between buttons */
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        justify-content: center;
+        padding-top: 60px; /* Adjust for logo height */
+    }
+
+    .nav-links a {
+        font-size: 20px; /* Slightly smaller for mobile */
+    }
+}
+
+/* Active state based on scroll (for index page only) */
+.nav-links a.active {
+    color: #00ff88;
+    border-bottom: 2px solid #00ff88;
+}
+
+/* Hero Header on Mobile */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 30px; /* Slightly smaller */
+        line-height: 1.1; /* Prevent line breaks */
+    }
+
+    .hero h1 span {
+        display: inline-block; /* Prevent breaking */
+    }
+}
+
+/* Technology Expertise (Mobile Tap) */
+@media (max-width: 768px) {
+    .tech-item {
+        cursor: pointer;
+    }
+
+    .tech-item:active .tech-tooltip {
+        opacity: 1;
+        top: -50px; /* Match desktop hover position */
+    }
+}
+
+/* Fade-in on Scroll for Boxes */
+.fade-in-box {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.fade-in-box.visible {
+    opacity: 1;
+}
+
+/* Apply to specific boxes */
+.about-grid-item,
+.why-choose-us-item,
+.stat-item,
+.tech-category,
+.service-item,
+.showreel-item,
+.process-grid-item,
+.process-overview,
+.testimonial-item,
+.contact-form-wrapper,
+.contact-details-wrapper {
+    /* Remove fade-in from inner text via JS */
+}
+
+/* Keep fade-in for standalone text */
+section > h2,
+section > p:not(:where(.about-grid-item p, .why-choose-us-item p, .stat-item p, .tech-item p, .service-item p, .showreel-item p, .process-grid-item p, .process-overview p, .testimonial-item p)) {
+    /* Retain original fade-in behavior */
+}
+
+/* Custom Highlight Color */
+::selection {
+    background: rgba(0, 255, 136, 0.3); /* Lighter green */
+    color: #0a0a0a;
+}
+/* Adjust the Learn More link and arrow */
+.process-step .learn-more,
+.process-grid-item .learn-more {
+    color: #666; /* Consistent dark gray color */
+    text-decoration: none; /* Remove the underline */
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
+    display: inline-flex; /* Use flex to align text and arrow */
+    align-items: center; /* Vertically center the text and arrow */
+}
+
+.process-step .learn-more i,
+.process-grid-item .learn-more i {
+    color: #666; /* Match the arrow color to the text */
+    margin-left: 8px;
+    font-size: 14px;
+    position: relative;
+    top: 8px; /* Increase this value to lower the arrow more noticeably */
+    transition: transform 0.3s; /* Keep the transform transition for hover */
+}
+
+.process-step .learn-more:hover,
+.process-grid-item .learn-more:hover {
+    color: #999; /* Hover color for text */
+}
+
+.process-step .learn-more:hover i,
+.process-grid-item .learn-more:hover i {
+    color: #999; /* Hover color for arrow */
+    transform: translateX(5px); /* Arrow movement on hover */
+}
+/* Why Choose Us Section (Mobile Alignment and Padding Fix) */
+.why-choose-us-item {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the left */
+    margin-bottom: 15px; /* Space between items */
+}
+
+.why-choose-us-header {
+    display: flex;
+    align-items: center; /* Align tick, text, and chevron on the same line */
+    gap: 10px; /* Space between tick, text, and chevron */
+    margin: 0; /* Remove default margins */
+    line-height: 1; /* Ensure consistent line height */
+    width: 100%; /* Ensure it takes full width */
+}
+
+.why-choose-us-item i {
+    font-size: 20px; /* Adjust tick/icon size */
+    color: #00ff88; /* Green color for icons */
+    flex-shrink: 0; /* Prevent tick from shrinking */
+    line-height: 1; /* Match line height to prevent vertical offset */
+}
+
+.why-choose-us-header h3 {
+    margin: 0; /* Remove default margins */
+    flex-grow: 1; /* Allow text to take remaining space */
+    line-height: 1; /* Match line height to prevent vertical offset */
+    font-size: 20px; /* Ensure consistent font size */
+}
+
+.why-choose-us-header .chevron {
+    font-size: 16px; /* Adjust chevron size */
+    color: #00ff88; /* Green color for chevron */
+    flex-shrink: 0; /* Prevent chevron from shrinking */
+    line-height: 1; /* Match line height to prevent vertical offset */
+}
+
+.why-choose-us-item p {
+    margin-bottom: 0; /* Remove excessive bottom margin/padding from the paragraph */
+    margin-top: 20px;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    .why-choose-us-item {
+        margin-bottom: 10px; /* Slightly less space between items on mobile */
+    }
+
+    .why-choose-us-header {
+        display: flex;
+        align-items: center; /* Reinforce alignment on mobile */
+        gap: 8px; /* Slightly smaller gap on mobile */
+        flex-wrap: nowrap; /* Prevent wrapping of tick, text, and chevron */
+    }
+
+    .why-choose-us-item i {
+        font-size: 18px; /* Slightly smaller tick on mobile */
+    }
+
+    .why-choose-us-header h3 {
+        font-size: 18px; /* Adjust font size for mobile */
+    }
+
+    .why-choose-us-header .chevron {
+        font-size: 14px; /* Slightly smaller chevron on mobile */
+    }
+}
+
+/* Mobile-specific adjustments for Process Timeline */
+@media (max-width: 768px) {
+    .process-timeline {
+        padding-left: 20px; /* Left margin for spacing */
+        padding-right: 20px; /* Right margin for balance */
+        gap: 20px; /* Reduce gap between steps on mobile */
+        background: #1a1a1a; /* Keep the background consistent */
+        position: relative;
+    }
+
+    .process-timeline::before {
+        display: none; /* Remove the green vertical line on mobile */
+    }
+
+    .timeline-header {
+        font-size: 20px;
+        text-align: left; /* Align left for consistency */
+        margin-bottom: 15px;
+        color: #00ff88;
+        font-family: 'Space Mono', monospace; /* Consistent font */
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .process-step {
+        flex-direction: row; /* Keep row layout */
+        align-items: center; /* Center-align the step number and content vertically */
+        gap: 20px; /* Space between step number and content */
+        padding-left: 80px; /* Equal padding on left */
+        padding-right: 10px; /* Equal padding on right */
+        position: relative;
+    }
+
+    .step-number {
+        position: absolute;
+        left: 0; /* Position the step number at the start */
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        left: 20px;
+        background: #1a1a1a; /* Match the timeline background */
+        z-index: 2; /* Ensure the step number is above any potential line (though line is removed) */
+        display: flex;
+        align-items: center; /* Center vertically */
+        justify-content: center; /* Center horizontally */
+        line-height: 1; /* Ensure no extra line height affects centering */
+    }
+
+    .step-content {
+        flex: 1;
+        background: transparent; /* Keep the background transparent */
+        padding: 0; /* Remove padding */
+        border-radius: 0; /* Remove border-radius */
+        box-shadow: none; /* Remove shadow */
+    }
+
+    .step-content i {
+        font-size: 20px; /* Slightly smaller icon on mobile */
+    }
+
+    .step-content h3 {
+        font-size: 18px; /* Slightly smaller heading on mobile */
+    }
+
+    .step-content p {
+        font-size: 14px; /* Slightly smaller text on mobile */
+    }
+
+    .step-content a {
+        font-size: 14px; /* Adjust "Learn More" font size */
     }
 }
