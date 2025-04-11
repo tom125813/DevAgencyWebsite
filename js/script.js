@@ -1,3 +1,18 @@
+// Theme Toggle
+const themeToggle = document.querySelector('.theme-toggle');
+const body = document.body;
+
+// Check for saved theme preference on load
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+    body.classList.add('light-theme');
+}
+
+themeToggle.addEventListener('click', () => {
+    body.classList.toggle('light-theme');
+    const isLightTheme = body.classList.contains('light-theme');
+    localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
+});
 // Fade-in on Scroll for Text Elements
 const fadeInElements = document.querySelectorAll('.fade-in');
 const observer = new IntersectionObserver(
@@ -87,16 +102,6 @@ window.addEventListener('resize', () => {
     }
 });
 
-// Local Time Update
-function updateLocalTime() {
-    const timeElement = document.querySelector('.local-time');
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    timeElement.textContent = `[${hours}:${minutes}]`;
-}
-setInterval(updateLocalTime, 1000);
-updateLocalTime();
 
 // Code Scramble Animation
 const scrambleElement = document.querySelector('.code-scramble');
@@ -114,7 +119,7 @@ setInterval(scrambleText, 2000);
 
 // Typewriter Effect
 const typewriterElement = document.querySelector('.typewriter');
-const words = ['Future', 'Success',  'Growth'];
+const words = ['Future', 'Success', 'Growth'];
 let wordIndex = 0;
 let charIndex = 0;
 let currentWord = '';

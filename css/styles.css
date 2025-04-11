@@ -355,13 +355,13 @@ section {
 
 .side-decor.left {
     left: -100px;
-    border-right: 1px solid rgba(0, 255, 136, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
     margin-right: 10px;
 }
 
 .side-decor.right {
     right: -100px;
-    border-left: 1px solid rgba(0, 255, 136, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
     margin-left: 10px;
 }
 
@@ -3549,4 +3549,1469 @@ section > p:not(:where(.about-grid-item p, .why-choose-us-item p, .stat-item p, 
     .step-content a {
         font-size: 14px; /* Adjust "Learn More" font size */
     }
+}
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+body.light-theme .theme-toggle {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.theme-toggle i {
+    font-size: 20px;
+    color: #00ff88;
+}
+
+body.light-theme .theme-toggle i {
+    color: #007bff;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+body.light-theme .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle .fa-moon {
+    display: block;
+}
+
+body.light-theme .theme-toggle .fa-moon {
+    display: none;
+}
+
+.theme-toggle .fa-sun {
+    display: none;
+}
+
+body.light-theme .theme-toggle .fa-sun {
+    display: block;
+}
+
+/* Hide on mobile as per your existing media query */
+@media (max-width: 768px) {
+    .theme-toggle {
+        display: none;
+    }
+}
+::selection {
+    background: rgba(0, 255, 136, 0.5); /* Updated lighter green */
+    color: #0a0a0a;
+}
+
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    position: relative; /* For absolute positioning of icons */
+}
+
+body.light-theme .theme-toggle {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.theme-toggle i {
+    font-size: 20px;
+    position: absolute; /* Stack icons on top of each other */
+    transition: opacity 0.3s ease; /* Smooth fade transition */
+}
+
+.theme-toggle .fa-moon {
+    color: #00ff88; /* Green for dark mode */
+    opacity: 1;
+}
+
+body.light-theme .theme-toggle .fa-moon {
+    opacity: 0; /* Hide moon in light mode */
+}
+
+.theme-toggle .fa-sun {
+    color: #ffcc00; /* Yellow for light mode (or adjust to #007bff if preferred) */
+    opacity: 0; /* Hidden by default in dark mode */
+}
+
+body.light-theme .theme-toggle .fa-sun {
+    opacity: 1; /* Show sun in light mode */
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+body.light-theme .theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .theme-toggle {
+        display: none; /* Hide on mobile as per your design */
+    }
+}
+
+/* Light Theme Styles for the Body */
+body.light-theme {
+    background: #f5f5f5; /* Light background */
+    color: #0a0a0a; /* Dark text */
+}
+
+/* Adjust other elements for light theme */
+body.light-theme .navbar {
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .nav-links a {
+    color: #0a0a0a;
+}
+
+body.light-theme .nav-links a:hover,
+body.light-theme .nav-links a.active {
+    color: #007bff; /* Blue for light mode hover/active */
+}
+
+body.light-theme .logo img {
+    filter: brightness(0); /* Darken logo if it’s light-colored; adjust as needed */
+}
+
+/* Add more light theme adjustments as needed for sections, buttons, etc. */
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05); /* Dark mode background */
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; /* Ensure the animation stays within bounds */
+    transition: background 0.3s ease;
+}
+
+body.light-theme .theme-toggle {
+    background: rgba(0, 0, 0, 0.05); /* Light mode background */
+}
+
+/* Pseudo-element for the circular animation */
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.1); /* Animation color for dark to light */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+    z-index: 0; /* Behind the icons */
+}
+
+body.light-theme .theme-toggle::before {
+    background: rgba(0, 0, 0, 0.1); /* Animation color for light to dark */
+}
+
+/* When the toggle is clicked, expand the circle */
+.theme-toggle.active::before {
+    width: 80px; /* Larger than the container to ensure full coverage */
+    height: 80px;
+}
+
+/* Icons styling */
+.theme-toggle i {
+    font-size: 20px;
+    position: absolute;
+    transition: opacity 0.3s ease;
+    z-index: 1; /* Above the animation */
+}
+
+.theme-toggle .fa-moon {
+    color: #00ff88; /* Green for dark mode */
+    opacity: 1;
+}
+
+body.light-theme .theme-toggle .fa-moon {
+    opacity: 0;
+}
+
+.theme-toggle .fa-sun {
+    color: #ffcc00; /* Yellow for light mode */
+    opacity: 0;
+}
+
+body.light-theme .theme-toggle .fa-sun {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .theme-toggle {
+        display: none; /* Hidden on mobile as per your design */
+    }
+}
+/* Light Theme Base Styles */
+body.light-theme {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2); /* Light gradient background */
+    color: #0a0a0a; /* Black text */
+}
+
+/* Navbar */
+body.light-theme .navbar {
+    background: rgba(0, 0, 0, 0.05); /* Light theme navbar background */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+}
+
+body.light-theme .nav-links a {
+    color: #0a0a0a; /* Black links */
+}
+
+body.light-theme .nav-links a:hover,
+body.light-theme .nav-links a.active {
+    color: #00ff88; /* Neon green for hover/active */
+}
+
+body.light-theme .nav-links a::after {
+    background: #00ff88; /* Neon green underline */
+}
+
+body.light-theme .logo img {
+    filter: brightness(0); /* Darken logo if it’s light-colored; adjust as needed */
+}
+
+/* Theme Toggle (already has light theme styles, but ensuring consistency) */
+body.light-theme .theme-toggle {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .theme-toggle::before {
+    background: rgba(0, 0, 0, 0.1); /* Animation color for light to dark */
+}
+
+body.light-theme .theme-toggle .fa-sun {
+    color: #ffcc00; /* Yellow sun icon (or #00ff88 if you prefer consistency) */
+}
+
+/* Hero Section */
+body.light-theme .hero h1 span {
+    color: #0a0a0a; /* Black "CODE" text */
+}
+
+body.light-theme .hero p {
+    color: #0a0a0a; /* Black paragraph text */
+}
+
+/* Section Headings (already neon green, no change needed) */
+
+/* About Section */
+body.light-theme .about {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2); /* Match body background */
+}
+
+body.light-theme .about-item {
+    background: rgba(0, 0, 0, 0.05); /* Light gray card */
+}
+
+body.light-theme .about-item h3 {
+    color: #0a0a0a; /* Black heading */
+}
+
+body.light-theme .about-item p {
+    color: #0a0a0a; /* Black text */
+}
+
+body.light-theme .about-item i {
+    color: #00ff88; /* Neon green icon */
+}
+
+/* Buttons (already correct, but ensuring consistency) */
+body.light-theme .btn {
+    background: #00ff88; /* Neon green */
+    color: #0a0a0a; /* Black text */
+}
+
+body.light-theme .btn:hover {
+    background: #00cc70; /* Slightly darker green on hover */
+}
+
+/* Why Choose Us Section */
+body.light-theme .why-choose-us {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .why-choose-us-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .why-choose-us-item h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .why-choose-us-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .why-choose-us-item i {
+    color: #00ff88;
+}
+
+/* Testimonials Section */
+body.light-theme .testimonials {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .testimonial-grid {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .testimonial-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .testimonial-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .testimonial-item h4 {
+    color: #0a0a0a;
+}
+
+/* Contact Section */
+body.light-theme .contact {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .contact h2 {
+    color: #0a0a0a;
+}
+
+body.light-theme .contact p {
+    color: #0a0a0a;
+}
+
+body.light-theme .contact-details p {
+    color: #0a0a0a;
+}
+
+body.light-theme .contact-details i {
+    color: #00ff88;
+}
+
+/* Map (if using an iframe or placeholder) */
+body.light-theme .map {
+    background: rgba(0, 0, 0, 0.05); /* If you have a map container */
+}
+
+/* Footer */
+body.light-theme footer {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .footer-grid h3 {
+    color: #00ff88; /* Keep neon green for headings */
+}
+
+body.light-theme .footer-grid a,
+body.light-theme .footer-grid p {
+    color: #0a0a0a;
+}
+
+body.light-theme .footer-grid a:hover {
+    color: #00ff88;
+}
+
+body.light-theme .footer-grid input {
+    background: #ffffff;
+    color: #0a0a0a;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .footer-grid button {
+    background: #00ff88;
+    color: #0a0a0a;
+}
+
+body.light-theme .footer-grid button:hover {
+    background: #00cc70;
+}
+/* Light Theme Base Styles */
+body.light-theme {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+    color: #0a0a0a;
+}
+
+/* Navbar */
+body.light-theme .navbar {
+    background: #0a0a0a; /* Black navbar in light theme */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Keep subtle border */
+}
+
+body.light-theme .navbar-container {
+    background: #0a0a0a; /* Ensure container matches */
+}
+
+body.light-theme .nav-links a {
+    color: #ffffff; /* White links to contrast with black navbar */
+}
+
+body.light-theme .nav-links a:hover,
+body.light-theme .nav-links a.active {
+    color: #007bff; /* Blue highlight for hover/active */
+}
+
+body.light-theme .nav-links a::after {
+    background: #007bff; /* Blue underline */
+}
+
+/* Navbar Hover Animation (Underline Scroll Out) */
+.nav-links a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #00ff88; /* Neon green in dark theme */
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+body.light-theme .nav-links a::after {
+    background: #007bff; /* Blue in light theme */
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    width: 100%;
+}
+
+/* Submenu Styles */
+.nav-item {
+    position: relative;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(255, 255, 255, 0.05); /* Dark theme submenu */
+    border-radius: 5px;
+    padding: 0.5rem 0;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+body.light-theme .submenu {
+    background: #0a0a0a; /* Black submenu in light theme to match navbar */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.submenu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #ffffff; /* White links in dark theme */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+body.light-theme .submenu a {
+    color: #ffffff; /* White links in light theme to contrast with black submenu */
+}
+
+.submenu a:hover {
+    color: #00ff88; /* Neon green hover in dark theme */
+}
+
+body.light-theme .submenu a:hover {
+    color: #007bff; /* Blue hover in light theme */
+}
+
+.nav-item:hover .submenu {
+    display: block;
+}
+
+/* Theme Toggle */
+body.light-theme .theme-toggle {
+    background: rgba(255, 255, 255, 0.05); /* Match navbar style */
+}
+
+body.light-theme .theme-toggle .fa-sun {
+    color: #0a0a0a; /* Black sun icon in light theme */
+}
+
+/* Hero Section */
+body.light-theme .hero h1 .code-scramble,
+body.light-theme .hero h1 .typewriter {
+    color: #007bff; /* Popping blue for "Code" and "Future" */
+    text-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Blue text shadow */
+}
+
+body.light-theme .hero p {
+    color: #0a0a0a;
+}
+
+body.light-theme .hero-arrow i {
+    color: #007bff; /* Blue chevron */
+}
+
+/* Section Headers (Side Decor) */
+body.light-theme .section-header {
+    color: #007bff; /* Blue for section headers */
+}
+
+body.light-theme .side-decor {
+    background: #007bff; /* Blue side decor */
+}
+
+/* About Section */
+body.light-theme .about {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .about-content h2 {
+    color: #007bff; /* Blue heading */
+}
+
+body.light-theme .about-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .about-grid-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .about-grid-item h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .about-grid-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .about-grid-item i {
+    color: #007bff; /* Blue icons */
+}
+
+/* Why Choose Us Section */
+body.light-theme .why-choose-us {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .why-choose-us-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .why-choose-us-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .why-choose-us-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .why-choose-us-item h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .why-choose-us-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .why-choose-us-item i {
+    color: #007bff;
+}
+
+body.light-theme .why-choose-us-header .chevron {
+    color: #007bff;
+}
+
+/* Stats Section (Our Achievements) */
+body.light-theme .stats {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .stats-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .stats-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .stat-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .stat-item h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .stat-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .stat-item i {
+    color: #007bff;
+}
+
+/* Tech Stack Section (Our Technology Expertise) */
+body.light-theme .tech-stack {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .tech-stack-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .tech-stack-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .tech-category h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .tech-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .tech-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .tech-item i {
+    color: #007bff;
+}
+
+body.light-theme .tech-tooltip {
+    background: #0a0a0a;
+    color: #ffffff;
+}
+
+/* Services Section */
+body.light-theme .services {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .services-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .services-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .service-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .service-item h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .service-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .service-item i {
+    color: #007bff;
+}
+
+/* Showreel Section */
+body.light-theme .showreel {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .showreel-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .showreel-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .showreel-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .showreel-item h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .showreel-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .showreel-item a {
+    color: #007bff;
+}
+
+body.light-theme .scroll-hint {
+    color: #0a0a0a;
+}
+
+body.light-theme .scroll-hint i {
+    color: #007bff;
+}
+
+/* Process Section */
+body.light-theme .process {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .process-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .process-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .timeline-header {
+    color: #0a0a0a;
+}
+
+body.light-theme .process-step {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .step-number {
+    color: #007bff;
+}
+
+body.light-theme .step-content h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .step-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .step-content i {
+    color: #007bff;
+}
+
+body.light-theme .step-content a {
+    color: #007bff;
+}
+
+body.light-theme .process-grid-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .process-grid-item h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .process-grid-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .process-grid-item i {
+    color: #007bff;
+}
+
+body.light-theme .learn-more {
+    color: #007bff;
+}
+
+body.light-theme .learn-more i {
+    color: #007bff;
+}
+
+body.light-theme .process-overview {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .process-overview h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .process-overview p {
+    color: #0a0a0a;
+}
+
+body.light-theme .process-overview i {
+    color: #007bff;
+}
+
+body.light-theme .process-benefits li {
+    color: #0a0a0a;
+}
+
+body.light-theme .process-benefits i {
+    color: #007bff;
+}
+
+/* Testimonials Section */
+body.light-theme .testimonials {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .testimonials-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .testimonials-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .testimonial-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .avatar {
+    background: #007bff;
+    color: #ffffff;
+}
+
+body.light-theme .testimonial-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .testimonial-item h4 {
+    color: #0a0a0a;
+}
+
+/* Contact Section */
+body.light-theme .contact {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .contact-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .contact-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .contact-form-wrapper h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .contact-form input,
+body.light-theme .contact-form select,
+body.light-theme .contact-form textarea {
+    background: #ffffff;
+    color: #0a0a0a;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .contact-btn {
+    background: #007bff; /* Blue button */
+    color: #ffffff;
+}
+
+body.light-theme .contact-btn:hover {
+    background: #0056b3; /* Darker blue on hover */
+}
+
+body.light-theme .contact-details-wrapper h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .contact-details p {
+    color: #0a0a0a;
+}
+
+body.light-theme .contact-details i {
+    color: #007bff;
+}
+
+body.light-theme .contact-details a {
+    color: #007bff;
+}
+
+/* Footer */
+body.light-theme .footer {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .footer-column h3 {
+    color: #007bff;
+}
+
+body.light-theme .footer-column a,
+body.light-theme .footer-column p {
+    color: #0a0a0a;
+}
+
+body.light-theme .footer-column a:hover {
+    color: #007bff;
+}
+
+body.light-theme .footer-newsletter input {
+    background: #ffffff;
+    color: #0a0a0a;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .footer-btn {
+    background: #007bff;
+    color: #ffffff;
+}
+
+body.light-theme .footer-btn:hover {
+    background: #0056b3;
+}
+
+body.light-theme .footer-bottom p {
+    color: #0a0a0a;
+}
+
+/* Buttons */
+body.light-theme .btn {
+    background: #007bff; /* Blue button */
+    color: #ffffff;
+}
+
+body.light-theme .btn:hover {
+    background: #0056b3; /* Darker blue on hover */
+}
+/* Light Theme Base Styles */
+body.light-theme {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+    color: #0a0a0a;
+}
+
+/* Navbar */
+body.light-theme .navbar {
+    background: rgba(255, 255, 255, 0.05); /* Transparent with blur in light theme */
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .navbar-container {
+    background: transparent; /* Ensure container matches */
+}
+
+body.light-theme .nav-links a {
+    color: #0a0a0a; /* Black links in light theme */
+}
+
+body.light-theme .nav-links a:hover,
+body.light-theme .nav-links a.active {
+    color: #007bff; /* Blue highlight for hover/active */
+}
+
+/* Fix Double Underline: Remove the active underline and keep only hover animation */
+.nav-links a {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background: #00ff88; /* Neon green in dark theme */
+    bottom: -5px;
+    left: 0;
+    transition: width 0.3s ease;
+}
+
+body.light-theme .nav-links a::after {
+    background: #007bff; /* Blue in light theme */
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Remove the active underline to prevent double underlines */
+.nav-links a.active::after {
+    width: 100%; /* Only one underline for active state */
+}
+
+/* Submenu Styles */
+body.light-theme .submenu {
+    background: rgba(255, 255, 255, 0.05); /* Match navbar style */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .submenu a {
+    color: #0a0a0a;
+}
+
+body.light-theme .submenu a:hover {
+    color: #007bff;
+}
+
+/* Theme Toggle */
+body.light-theme .theme-toggle {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .theme-toggle .fa-sun {
+    color: #0a0a0a;
+}
+
+/* Hero Section */
+body.light-theme .hero h1 {
+    color: #0a0a0a; /* Black text for "We Build" and "That Powers Your" */
+}
+
+body.light-theme .hero h1 .code-scramble,
+body.light-theme .hero h1 .typewriter {
+    color: #007bff; /* Blue for "Code" and "Future" */
+    text-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+body.light-theme .hero p {
+    color: #0a0a0a; /* Black paragraph text */
+}
+
+body.light-theme .hero-arrow i {
+    color: #007bff;
+}
+
+/* Section Headers (Side Decor) */
+body.light-theme .section-header {
+    color: #007bff; /* Blue for section headers */
+}
+
+body.light-theme .side-decor {
+    background: #007bff; /* Blue side decor */
+}
+
+/* About Section */
+body.light-theme .about {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .about-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .about-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .about-grid-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .about-grid-item h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .about-grid-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .about-grid-item i {
+    color: #007bff;
+}
+
+/* Why Choose Us Section */
+body.light-theme .why-choose-us {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .why-choose-us-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .why-choose-us-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .why-choose-us-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .why-choose-us-item h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .why-choose-us-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .why-choose-us-item i {
+    color: #007bff;
+}
+
+body.light-theme .why-choose-us-header .chevron {
+    color: #007bff;
+}
+
+/* Stats Section (Our Achievements) */
+body.light-theme .stats {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .stats-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .stats-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .stat-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .stat-item h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .stat-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .stat-item i {
+    color: #007bff;
+}
+
+/* Tech Stack Section (Our Technology Expertise) */
+body.light-theme .tech-stack {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .tech-stack-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .tech-stack-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .tech-category h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .tech-item {
+    background: rgba(0, 0, 0, 0.05); /* Add light gray background */
+    border-radius: 8px;
+}
+
+body.light-theme .tech-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .tech-item i {
+    color: #007bff;
+}
+
+body.light-theme .tech-tooltip {
+    background: #0a0a0a;
+    color: #ffffff;
+}
+
+/* Services Section */
+body.light-theme .services {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .services-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .services-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .service-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .service-item h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .service-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .service-item i {
+    color: #007bff;
+}
+
+/* Showreel Section */
+body.light-theme .showreel {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .showreel-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .showreel-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .showreel-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .showreel-item h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .showreel-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .showreel-item a {
+    background: #007bff; /* Blue background for "View Project" */
+    color: #ffffff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+body.light-theme .showreel-item a:hover {
+    background: #0056b3; /* Darker blue on hover */
+}
+
+body.light-theme .scroll-hint {
+    color: #0a0a0a;
+}
+
+body.light-theme .scroll-hint i {
+    color: #007bff;
+}
+
+/* Process Section */
+body.light-theme .process {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .process-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .process-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .timeline-header {
+    color: #0a0a0a;
+}
+
+body.light-theme .process-step {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .step-number {
+    color: #007bff;
+}
+
+body.light-theme .step-content h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .step-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .step-content i {
+    color: #007bff;
+}
+
+body.light-theme .step-content a {
+    color: #007bff;
+}
+
+body.light-theme .process-grid-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .process-grid-item h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .process-grid-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .process-grid-item i {
+    color: #007bff;
+}
+
+body.light-theme .learn-more {
+    color: #007bff;
+}
+
+body.light-theme .learn-more i {
+    color: #007bff;
+}
+
+body.light-theme .process-overview {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .process-overview h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .process-overview p {
+    color: #0a0a0a;
+}
+
+body.light-theme .process-overview i {
+    color: #007bff;
+}
+
+body.light-theme .process-benefits li {
+    color: #0a0a0a;
+}
+
+body.light-theme .process-benefits i {
+    color: #007bff;
+}
+
+/* Testimonials Section */
+body.light-theme .testimonials {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .testimonials-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .testimonials-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .testimonial-item {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .avatar {
+    background: #007bff;
+    color: #ffffff;
+}
+
+body.light-theme .testimonial-item p {
+    color: #0a0a0a;
+}
+
+body.light-theme .testimonial-item h4 {
+    color: #0a0a0a;
+}
+
+/* Contact Section */
+body.light-theme .contact {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+}
+
+body.light-theme .contact-content h2 {
+    color: #007bff;
+}
+
+body.light-theme .contact-content p {
+    color: #0a0a0a;
+}
+
+body.light-theme .contact-form-wrapper h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .contact-form input,
+body.light-theme .contact-form select,
+body.light-theme .contact-form textarea {
+    background: #ffffff;
+    color: #0a0a0a;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .contact-btn {
+    background: #007bff; /* Blue button */
+    color: #ffffff;
+}
+
+body.light-theme .contact-btn:hover {
+    background: #0056b3; /* Darker blue on hover */
+}
+
+body.light-theme .contact-details-wrapper h3 {
+    color: #0a0a0a;
+}
+
+body.light-theme .contact-details p {
+    color: #0a0a0a;
+}
+
+body.light-theme .contact-details i {
+    color: #007bff;
+}
+
+body.light-theme .contact-details a {
+    color: #007bff;
+}
+
+/* Footer */
+body.light-theme .footer {
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .footer-column h3 {
+    color: #007bff;
+}
+
+body.light-theme .footer-column a,
+body.light-theme .footer-column p {
+    color: #0a0a0a;
+}
+
+body.light-theme .footer-column a:hover {
+    color: #007bff;
+}
+
+body.light-theme .footer-newsletter input {
+    background: #ffffff;
+    color: #0a0a0a;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .footer-btn {
+    background: #007bff;
+    color: #ffffff;
+}
+
+body.light-theme .footer-btn:hover {
+    background: #0056b3;
+}
+
+body.light-theme .footer-bottom p {
+    color: #0a0a0a;
+}
+
+/* Buttons */
+body.light-theme .btn {
+    background: #007bff;
+    color: #ffffff;
+}
+
+body.light-theme .btn:hover {
+    background: #0056b3;
 }
