@@ -22,23 +22,38 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles2.css">
+    <!-- Synchronous script to apply theme before rendering -->
+    <script>
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.documentElement.classList.add('light-theme');
+        }
+    </script>
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="spinner"></div>
+    </div>
+
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbar-container">
             <a href="#home" class="logo">
-                <img src="images/logo.png" alt="Kode Logo">
+                <img src="images/logo.png" alt="Kode Logo" class="logo-img">
             </a>
             <div class="nav-links">
                 <a href="#home" class="active">Home</a>
-                <a href="#about">About</a>
+                <a href="#vision">Vision</a>
+                <a href="#impact">Impact</a>
                 <a href="#products">Products</a>
+                <a href="#clients">Clients</a>
                 <a href="#contact">Contact</a>
             </div>
             <div class="theme-toggle">
-                <i class="fas fa-moon"></i>
-                <i class="fas fa-sun"></i>
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
             </div>
             <div class="hamburger">
                 <span></span>
@@ -48,89 +63,108 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (From Old Page, Styled to Match New Page) -->
     <section class="hero" id="home">
         <h1>
-            <span class="code-scramble">Building</span> Tomorrow’s <span class="typewriter">Innovations</span>
+            We Are <span class="code-scramble">Building</span> Your <span class="typewriter">Future</span>
         </h1>
         <p>
             We create groundbreaking products that empower businesses, enhance lives, redefine gaming, and streamline logistics.
         </p>
-        <a href="#products" class="hero-arrow"><i class="fas fa-chevron-down"></i></a>
+        <a href="#vision" class="hero-arrow"><i class="fas fa-chevron-down"></i></a>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="section-header">About Kode</div>
+    <!-- Vision Section -->
+    <section class="vision section-bg-1" id="vision">
+        <div class="section-header">Our Vision</div>
         <div class="side-decor left"></div>
         <div class="side-decor right"></div>
-        <div class="about-content">
-            <h2 class="fade-in">Who We Are</h2>
+        <div class="vision-content">
+            <h2 class="fade-in">Shaping the Future</h2>
             <p class="fade-in">
-                Kode is the driving force behind four innovative products: Breezy, Detox, Tower of Bedrock, and Bespoke Deliveries. We’re passionate about using technology to solve real-world problems with creativity and precision.
+                At Kode, we believe technology should solve real problems with elegance and impact. From AI-driven platforms to immersive gaming experiences, we’re building a smarter, healthier, and more connected world—partnering with global brands and innovating our own solutions.
             </p>
-            <div class="about-grid">
-                <div class="about-grid-item">
-                    <i class="fas fa-bolt"></i>
-                    <h3 class="fade-in">Innovation</h3>
-                    <p class="fade-in">Pushing the boundaries of what’s possible.</p>
+            <div class="vision-grid">
+                <div class="vision-grid-item">
+                    <i class="fas fa-rocket"></i>
+                    <h3 class="fade-in">Pioneering</h3>
+                    <p class="fade-in">Leading with bold ideas that redefine industries.</p>
                 </div>
-                <div class="about-grid-item">
-                    <i class="fas fa-heart"></i>
-                    <h3 class="fade-in">Impact</h3>
-                    <p class="fade-in">Creating solutions that matter.</p>
+                <div class="vision-grid-item">
+                    <i class="fas fa-globe"></i>
+                    <h3 class="fade-in">Global Reach</h3>
+                    <p class="fade-in">Powering solutions for clients and users worldwide.</p>
                 </div>
-                <div class="about-grid-item">
+                <div class="vision-grid-item">
+                    <i class="fas fa-brain"></i>
+                    <h3 class="fade-in">Intelligent Design</h3>
+                    <p class="fade-in">Crafting intuitive, AI-enhanced experiences.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact section-bg-4" id="impact">
+        <div class="section-header">Our Impact</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="impact-content">
+            <h2 class="fade-in">Making a Difference</h2>
+            <p class="fade-in">
+                Our work transforms industries and lives, delivering measurable results for our users and partners worldwide.
+            </p>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <i class="fas fa-briefcase"></i>
+                    <h3 class="fade-in" data-count="50">50+</h3>
+                    <p class="fade-in">Projects Delivered</p>
+                </div>
+                <div class="impact-item">
+                    <i class="fas fa-star"></i>
+                    <h3 class="fade-in" data-count="100">100%</h3>
+                    <p class="fade-in">Client Satisfaction</p>
+                </div>
+                <div class="impact-item">
                     <i class="fas fa-users"></i>
-                    <h3 class="fade-in">Community</h3>
-                    <p class="fade-in">Building for and with our users.</p>
+                    <h3 class="fade-in" data-count="500000">500,000+</h3>
+                    <p class="fade-in">Users Impacted</p>
+                </div>
+                <div class="impact-item">
+                    <i class="fas fa-user-check"></i>
+                    <h3 class="fade-in" data-count="100000">100,000+</h3>
+                    <p class="fade-in">Monthly Active Users</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Products Section -->
-    <section class="products" id="products">
+    <section class="products section-bg-2" id="products">
         <div class="section-header">Our Products</div>
         <div class="side-decor left"></div>
         <div class="side-decor right"></div>
         <div class="products-content">
-            <h2 class="fade-in">What We’ve Built</h2>
+            <h2 class="fade-in">Innovations We Own</h2>
             <p class="fade-in">
-                Discover the products that define Kode’s vision for a smarter, healthier, and more connected world.
+                Our in-house products are designed to push boundaries, delivering unparalleled value to businesses and individuals alike.
             </p>
             <div class="products-grid-wrapper">
                 <button class="scroll-arrow left"><i class="fas fa-chevron-left"></i></button>
                 <div class="products-grid">
                     <div class="product-item">
-                        <img src="https://placehold.co/300x150" alt="Breezy">
+                        <img src="https://placehold.co/300x150/2a2a2a/2a2a2a" alt="Breezy" loading="lazy">
                         <h3 class="fade-in">Breezy</h3>
                         <p class="fade-in">
-                            An AI-powered platform helping businesses save money by outsourcing customer interactions to high-quality, automated responses.
+                            An AI-powered platform revolutionizing customer interactions, saving businesses millions through seamless automation and high-quality responses.
                         </p>
                         <a href="products/breezy.html" class="btn">Learn More</a>
                     </div>
                     <div class="product-item">
-                        <img src="https://placehold.co/300x150" alt="Bespoke Deliveries">
-                        <h3 class="fade-in">Bespoke Deliveries</h3>
-                        <p class="fade-in">
-                            A digital front for a UK-based delivery service, offering seamless user experiences and real-time tracking.
-                        </p>
-                        <a href="products/bespoke-deliveries.html" class="btn">Learn More</a>
-                    </div>
-                    <div class="product-item">
-                        <img src="https://placehold.co/300x150" alt="Tower of Bedrock">
-                        <h3 class="fade-in">Tower of Bedrock</h3>
-                        <p class="fade-in">
-                            A thriving Minecraft game with over 1,000 daily players, paired with a custom-coded website for an immersive community experience.
-                        </p>
-                        <a href="products/tower-of-bedrock.html" class="btn">Learn More</a>
-                    </div>
-                    <div class="product-item">
-                        <img src="https://placehold.co/300x150" alt="Detox">
+                        <img src="https://placehold.co/300x150/2a2a2a/2a2a2a" alt="Detox" loading="lazy">
                         <h3 class="fade-in">Detox</h3>
                         <p class="fade-in">
-                            Personalized detox plans crafted by AI to support your health goals, tailored to your unique needs.
+                            Personalized AI-crafted detox plans tailored to your unique health goals, empowering you to live your best life.
                         </p>
                         <a href="products/detox.html" class="btn">Learn More</a>
                     </div>
@@ -140,15 +174,50 @@
         </div>
     </section>
 
+    <!-- Client Successes Section -->
+    <section class="clients section-bg-3" id="clients">
+        <div class="section-header">Client Successes</div>
+        <div class="side-decor left"></div>
+        <div class="side-decor right"></div>
+        <div class="clients-content">
+            <h2 class="fade-in">Impact for Our Partners</h2>
+            <p class="fade-in">
+                We collaborate with leading brands to deliver transformative solutions that drive success and innovation.
+            </p>
+            <div class="clients-grid-wrapper">
+                <button class="scroll-arrow left"><i class="fas fa-chevron-left"></i></button>
+                <div class="clients-grid">
+                    <div class="client-item">
+                        <img src="https://placehold.co/300x150/2a2a2a/2a2a2a" alt="Bespoke Deliveries" loading="lazy">
+                        <h3 class="fade-in">Bespoke Deliveries</h3>
+                        <p class="fade-in">
+                            A seamless digital platform for a UK-based delivery service, offering real-time tracking and an exceptional user experience.
+                        </p>
+                        <a href="products/bespoke-deliveries.html" class="btn">Learn More</a>
+                    </div>
+                    <div class="client-item">
+                        <img src="https://placehold.co/300x150/2a2a2a/2a2a2a" alt="Tower of Bedrock" loading="lazy">
+                        <h3 class="fade-in">Tower of Bedrock</h3>
+                        <p class="fade-in">
+                            A game with over 1,000 daily players, fully coded by us and enhanced by a custom-coded website for immersive engagement.
+                        </p>
+                        <a href="products/tower-of-bedrock.html" class="btn">Learn More</a>
+                    </div>
+                </div>
+                <button class="scroll-arrow right"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
-    <section class="contact" id="contact">
+    <section class="contact section-bg-5" id="contact">
         <div class="section-header">Contact</div>
         <div class="side-decor left"></div>
         <div class="side-decor right"></div>
         <div class="contact-content">
-            <h2 class="fade-in">Get in Touch</h2>
+            <h2 class="fade-in">Let’s Build Together</h2>
             <p class="fade-in">
-                Curious about Kode or our products? Drop us a message to learn more about what we’re building.
+                Got a question or an idea? Reach out to explore how Kode can bring your vision to life.
             </p>
             <div class="contact-layout">
                 <div class="contact-form-wrapper">
@@ -159,10 +228,10 @@
                             <input type="email" placeholder="Your Email" required>
                         </div>
                         <select id="contact-type" required>
-                            <option value="" disabled selected>Select a Reason for Contact</option>
+                            <option value="" disabled selected>Select a Reason</option>
                             <option value="general">General Inquiry</option>
                             <option value="product">Product Questions</option>
-                            <option value="careers">Careers</option>
+                            <option value="partnership">Partnership</option>
                             <option value="other">Other</option>
                         </select>
                         <textarea placeholder="Your Message" required></textarea>
@@ -170,22 +239,40 @@
                     </form>
                 </div>
                 <div class="contact-details-wrapper">
-                    <h3 class="fade-in">Contact Details</h3>
+                    <h3 class="fade-in">Reach Out Directly</h3>
                     <div class="contact-details">
-                        <p class="fade-in"><i class="fas fa-envelope"></i> <strong>Email:</strong> <a href="mailto:hello@kode.dev">hello@kode.dev</a></p>
-                        <p class="fade-in"><i class="fas fa-phone"></i> <strong>Phone:</strong> +1 (555) 123-4567</p>
-                        <p class="fade-in"><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> 123 Innovation Drive, Tech City, USA</p>
+                        <div class="contact-detail-item fade-in">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <a href="mailto:hello@kode.dev">hello@kode.dev</a>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item fade-in">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Phone</strong>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail-item fade-in">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Address</strong>
+                                <p>123 Innovation Drive, Tech City, USA</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer (Styled Like Old Page, Content from New Page) -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-column">
-                <h3>Kode</h3>
+                <h3>KODE</h3>
                 <p>Innovating today for a better tomorrow. Join us in shaping the future with cutting-edge technology.</p>
                 <div class="footer-social">
                     <a href="https://twitter.com/kode_dev"><i class="fab fa-twitter"></i></a>
@@ -196,30 +283,35 @@
             <div class="footer-column">
                 <h3>Navigation</h3>
                 <a href="#home">Home</a>
-                <a href="#about">About</a>
+                <a href="#vision">Vision</a>
                 <a href="#products">Products</a>
+                <a href="#clients">Clients</a>
                 <a href="#contact">Contact</a>
             </div>
             <div class="footer-column">
                 <h3>Products</h3>
                 <a href="products/breezy.html">Breezy</a>
                 <a href="products/detox.html">Detox</a>
+            </div>
+            <div class="footer-column">
+                <h3>Clients</h3>
                 <a href="products/tower-of-bedrock.html">Tower of Bedrock</a>
                 <a href="products/bespoke-deliveries.html">Bespoke Deliveries</a>
             </div>
             <div class="footer-column">
-                <h3>Careers</h3>
-                <a href="careers/software-engineer.html">Software Engineer</a>
-                <a href="careers/ai-specialist.html">AI Specialist</a>
-                <a href="careers/game-developer.html">Game Developer</a>
-                <a href="careers.html">View All</a>
+                <h3>Legal</h3>
+                <a href="legal/terms.html">Terms of Service</a>
+                <a href="legal/privacy.html">Privacy Policy</a>
+                <a href="legal/cookies.html">Cookie Policy</a>
             </div>
             <div class="footer-column footer-newsletter">
                 <h3>Newsletter</h3>
                 <p>Stay updated with Kode’s latest innovations.</p>
                 <form>
-                    <input type="email" placeholder="Your Email" required>
-                    <button type="submit" class="footer-btn">Subscribe</button>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your Email" required>
+                        <button type="submit" class="footer-btn">Subscribe</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -227,7 +319,12 @@
             <p>© 2025 Kode. All rights reserved.</p>
         </div>
     </footer>
-  <script src="js/script.js"></script>
-    <script src="js/script2.js"></script>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Back to Top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="js/script2.js" defer></script>
 </body>
 </html>
