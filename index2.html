@@ -241,19 +241,19 @@
             <div class="contact-layout">
                 <div class="contact-form-wrapper">
                     <h3 class="fade-in">Send Us a Message</h3>
-                    <form id="contact-form" class="contact-form">
+                    <form id="contact-form" class="contact-form" action="https://formspree.io/f/xldjzqyo" method="POST">
                         <div class="form-row">
-                            <input type="text" placeholder="Your Name" required>
-                            <input type="email" placeholder="Your Email" required>
+                            <input type="text" placeholder="Your Name" name="name" required>
+                            <input type="email" placeholder="Your Email" name="email" required>
                         </div>
-                        <select id="contact-type" required>
+                        <select id="contact-type" name="reason" required>
                             <option value="" disabled selected>Select a Reason</option>
                             <option value="general">General Inquiry</option>
                             <option value="product">Product Questions</option>
                             <option value="partnership">Partnership</option>
                             <option value="other">Other</option>
                         </select>
-                        <textarea placeholder="Your Message" required></textarea>
+                        <textarea placeholder="Your Message" name="message" required></textarea>
                         <button type="submit" class="contact-btn">Send Message</button>
                     </form>
                 </div>
@@ -323,7 +323,7 @@
                 <a href="legal/privacy.html">Privacy Policy</a>
                 <a href="legal/cookies.html">Cookie Policy</a>
             </div>
-            <div class="footer-column footer-newsletter">
+            <!--<div class="footer-column footer-newsletter">
                 <h3>Newsletter</h3>
                 <p>Stay updated with Kode’s latest innovations.</p>
                 <form>
@@ -332,7 +332,7 @@
                         <button type="submit" class="footer-btn">Subscribe</button>
                     </div>
                 </form>
-            </div>
+            </div>-->
         </div>
         <div class="footer-bottom">
             <p>© 2025 Kode. All rights reserved.</p>

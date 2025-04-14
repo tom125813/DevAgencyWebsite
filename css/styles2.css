@@ -709,7 +709,7 @@ a:hover {
 .footer-content {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 30px;
+    gap: 100px;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
@@ -718,6 +718,7 @@ a:hover {
 .footer-column {
     display: flex;
     flex-direction: column;
+
 }
 
 .footer-column h3 {
@@ -2082,4 +2083,8 @@ section {
     transform: translateY(-2px);
     opacity: 0.9;
     transition: transform 0.3s ease, opacity 0.3s ease; /* Ensure hover transitions for transform and opacity */
+}
+
+.hero-arrow {
+  left: calc(50% - 15px);
 }

@@ -494,11 +494,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Form Submission
     const contactForm = document.querySelector('#contact-form');
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        alert('Thank you for your message! We’ll get back to you soon.');
-        contactForm.reset();
-        document.querySelector('#contact-type').value = '';
+
+        try {
+            const formData = new FormData(contactForm);
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                alert('Thank you for your message! We’ll get back to you soon.');
+                contactForm.reset();
+                document.querySelector('#contact-type').value = '';
+            } else {
+                alert('There was an error sending your message. Please try again.');
+            }
+        } catch (error) {
+            alert('There was an error sending your message. Please try again.');
+        }
     });
 
     // Back to Top Button
