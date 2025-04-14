@@ -3,70 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 - Page Not Found | KODE</title>
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="images/logo.ico">
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Space+Mono&display=swap">
-    <!-- Font Awesome (for icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
-    <!-- Inline CSS for 404-specific styles -->
+    <title>404 | Page Not Found - Kode</title>
+    <meta name="description" content="Oops! The page you're looking for doesn't exist. Return to Kode's homepage to explore our innovative solutions.">
+    <meta name="keywords" content="Kode, 404, page not found, innovation">
+    <meta name="robots" content="noindex">
+    <meta property="og:title" content="404 | Page Not Found - Kode">
+    <meta property="og:description" content="The page you're looking for can't be found. Return to Kode's homepage to explore our solutions!">
+    <meta property="og:image" content="images/logo.png">
+    <meta property="og:url" content="https://www.kode.dev/404">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="404 | Page Not Found - Kode">
+    <meta name="twitter:description" content="The page you're looking for can't be found. Return to Kode's homepage to explore our solutions!">
+    <meta name="twitter:image" content="images/logo.png">
+    <link rel="icon" type="image/png" href="images/logo.ico">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Inline styles for 404 section -->
     <style>
-        /* Reset default margins and ensure full viewport height */
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden; /* Prevent any scrolling */
-        }
-
-        /* 404 Page Styles */
-        .error-page {
+        .error-section {
             min-height: 100vh;
-            background: linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%); /* Subtle gradient background */
-            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
-            box-sizing: border-box;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, rgba(0, 255, 136, 0.15) 100%);
         }
-
-        /* Subtle radial gradient overlay for depth */
-        .error-page::before {
+        .light-theme .error-section {
+            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 50%, rgba(0, 123, 255, 0.15) 100%);
+        }
+        .error-section::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
-            transform: translate(-50%, -50%);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100" opacity="0.05"><path d="M0 50H20M50 0V20M50 80V100M80 50H100M20 20L40 40M60 60L80 80M20 80L40 60M60 40L80 20" stroke="currentColor" stroke-width="2" fill="none"/></svg>') repeat;
+            opacity: 0.05;
             z-index: 0;
         }
-
-        .error-page > * {
-            position: relative;
-            z-index: 1; /* Ensure content is above the gradient overlay */
+        .light-theme .error-section::before {
+            opacity: 0.1;
         }
-
-        .error-page .logo {
-            margin-bottom: 20px; /* Adjusted space since "404" is removed */
+        .error-content {
+            max-width: 800px;
+            padding: 70px;
+            border-radius: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        .light-theme .error-content {
+        }
+        .error-content h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: 6rem;
+            color: #00ff88;
+            margin-bottom: 0.5rem;
+            line-height: 1;
             position: relative;
             display: inline-block;
-            animation: glitch 2s linear infinite;
+            animation: glitch 1s linear infinite;
         }
-
-        .error-page .logo img {
-            width: 220px; /* Kept the same size as before */
-            height: 220px;
+        .light-theme .error-content h1 {
+            color: #007bff;
         }
-
-        /* Glitch Animation */
         @keyframes glitch {
             2%, 64% {
                 transform: translate(2px, 0) skew(0deg);
@@ -78,88 +85,199 @@
                 transform: translate(0, 0) skew(5deg);
             }
         }
-
-        .error-page p {
+        @keyframes glitch-top {
+            2%, 64% {
+                transform: translate(2px, -2px);
+            }
+            4%, 60% {
+                transform: translate(-2px, 2px);
+            }
+            62% {
+                transform: translate(13px, -1px) skew(-13deg);
+            }
+        }
+        .error-content h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: 2.5rem;
+            color: #cccccc;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .light-theme .error-content h2 {
+            color: #666666;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .error-content p {
             font-family: 'Inter', sans-serif;
-            font-size: 20px;
-            color: #00FF88;
-            margin: 30px 0; /* Space to push button lower */
-            max-width: 400px; /* Limit width for better readability */
-            position: relative;
+            font-size: 1.15rem;
+            color: #dddddd;
+            max-width: 500px;
+            margin: 0 auto 1rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        .light-theme .error-content p {
+            color: #555555;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .error-content .subtext {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #aaaaaa;
+            margin-bottom: 2rem;
+        }
+        .light-theme .error-content .subtext {
+            color: #777777;
+        }
+        .error-content .btn {
             display: inline-block;
-        }
-
-        .error-page .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 12px 30px;
-            background: transparent;
-            border: 2px solid #00FF88;
-            border-radius: 50px;
-            color: #00FF88;
+            padding: 14px 28px;
+            background: #00ff88;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.9), rgba(0, 200, 112, 0.9));
+            color: #0a0a0a;
+            border: none;
+            border-radius: 8px;
+            width:170px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 1rem;
+            font-weight: 600;
             text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            animation-delay: 1s; /* Slight delay for staggered effect */
+            transition: background 0.3s ease, transform 0.2s ease;
         }
-
-        .error-page .btn i {
-            margin-left: 10px; /* Space between text and arrow */
-            font-size: 16px;
+        .light-theme .error-content .btn {
+            background: #007bff;
+            background: linear-gradient(135deg, rgba(0, 123, 255, 0.9), rgba(0, 86, 179, 0.9));
         }
-
-        .error-page .btn:hover {
-            background: #00FF88;
-            color: #0A0A0A;
-            box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+        .error-content .btn:hover {
+            background: linear-gradient(135deg, rgba(0, 200, 112, 0.9), rgba(0, 160, 90, 0.9));
+            transform: translateY(-2px);
         }
-
-        .error-page .btn:hover i {
-            color: #0A0A0A; /* Ensure arrow color matches text on hover */
+        .light-theme .error-content .btn:hover {
+            background: linear-gradient(135deg, rgba(0, 86, 179, 0.9), rgba(0, 60, 125, 0.9));
         }
-
-        /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .error-page .logo img {
-                width: 180px; /* Adjusted for mobile */
-                height: 180px;
+            .error-content {
+                padding: 20px;
             }
-
-            .error-page p {
-                font-size: 16px;
-                margin: 20px 0;
-                max-width: 300px;
+            .error-content h1 {
+                font-size: 4rem;
             }
-
-            .error-page .btn {
-                padding: 10px 25px;
-                font-size: 12px;
+            .error-content h2 {
+                font-size: 1.8rem;
             }
-
-            .error-page .btn i {
-                font-size: 14px;
+            .error-content p {
+                font-size: 0.95rem;
             }
-
-            .error-page::before {
-                width: 300px;
-                height: 300px;
+            .error-content .subtext {
+                font-size: 0.8rem;
+            }
+            .error-content .btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="error-page">
-        <a href="index.html" class="logo">
-            <img src="https://tom125813.github.io/Kode/images/logo.png" alt="KODE Logo">
-        </a>
-        <p>The page you’re looking for might have been removed, renamed, or is temporarily unavailable.</p>
-        <a href="https://tom125813.github.io/Kode/index.html" class="btn">
-            Back to Home
-            <i class="fas fa-arrow-right-long"></i>
-        </a>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="spinner"></div>
     </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">
+                <img src="images/logo.png" alt="Kode Logo" class="logo-img">
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="index.html#vision">Vision</a>
+                <a href="index.html#impact">Impact</a>
+                <a href="index.html#products">Products</a>
+                <a href="index.html#clients">Clients</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+            <div class="theme-toggle">
+                <div class="toggle-switch">
+                    <span class="switch"></span>
+                </div>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 404 Section -->
+    <section class="error-section" id="error">
+        <div class="error-content">
+            <h1 class="code-scramble">404</h1>
+            <h2>Page Not Found</h2>
+            <p>Our servers might be debugging the universe, but we’ll get you back on track.</p>
+            <a href="index.html" class="btn" style="margin-top: 1rem;">Return Home</a>
+        </div>
+    </section>
+
+    <!-- Footer (Styled Like Old Page, Content from New Page) -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>KODE</h3>
+                <p>Innovating today for a better tomorrow. Join us in shaping the future with cutting-edge technology.</p>
+                <div class="footer-social">
+                    <a href="https://twitter.com/kode_dev"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/company/kode"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/kode"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Navigation</h3>
+                <a href="#home">Home</a>
+                <a href="#vision">Vision</a>
+                <a href="#products">Products</a>
+                <a href="#clients">Clients</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h3>Products</h3>
+                <a href="products/breezy.html">Breezy</a>
+                <a href="products/detox.html">Detox</a>
+            </div>
+            <div class="footer-column">
+                <h3>Clients</h3>
+                <a href="products/tower-of-bedrock.html">Tower of Bedrock</a>
+                <a href="products/bespoke-deliveries.html">Bespoke Deliveries</a>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <a href="legal/terms.html">Terms of Service</a>
+                <a href="legal/privacy.html">Privacy Policy</a>
+                <a href="legal/cookies.html">Cookie Policy</a>
+            </div>
+            <!--<div class="footer-column footer-newsletter">
+                <h3>Newsletter</h3>
+                <p>Stay updated with Kode’s latest innovations.</p>
+                <form>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your Email" required>
+                        <button type="submit" class="footer-btn">Subscribe</button>
+                    </div>
+                </form>
+            </div>-->
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 Kode. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Back to Top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="js/script.js" defer></script>
 </body>
 </html>
