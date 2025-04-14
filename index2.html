@@ -24,7 +24,24 @@
     <link rel="stylesheet" href="css/styles2.css">
     <!-- Synchronous script to apply theme before rendering -->
     <script>
-        const savedTheme = localStorage.getItem('theme');
+        // Minimal getCookie function for inline use
+        function getCookie(name) {
+            const nameEQ = name + '=';
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = cookies[i];
+                while (cookie.charAt(0) === ' ') {
+                    cookie = cookie.substring(1, cookie.length);
+                }
+                if (cookie.indexOf(nameEQ) === 0) {
+                    return cookie.substring(nameEQ.length, cookie.length);
+                }
+            }
+            return null;
+        }
+
+        // Apply theme immediately based on cookie
+        const savedTheme = getCookie('theme');
         if (savedTheme === 'light') {
             document.documentElement.classList.add('light-theme');
         }
@@ -152,16 +169,18 @@
             <div class="products-grid-wrapper">
                 <button class="scroll-arrow left"><i class="fas fa-chevron-left"></i></button>
                 <div class="products-grid">
+                  <div class="product-item">
+  <div class="breezy-icon-container">
+      <img src="images/breezy_blue.png" alt="Breezy" loading="lazy">
+  </div>
+  <h3 class="fade-in">Breezy</h3>
+  <p class="fade-in">
+      An AI-powered platform revolutionizing customer interactions, saving businesses millions through seamless automation and high-quality responses.
+  </p>
+  <a href="products/breezy.html" class="btn">Learn More</a>
+</div>
                     <div class="product-item">
-                        <img src="https://placehold.co/300x150/2a2a2a/2a2a2a" alt="Breezy" loading="lazy">
-                        <h3 class="fade-in">Breezy</h3>
-                        <p class="fade-in">
-                            An AI-powered platform revolutionizing customer interactions, saving businesses millions through seamless automation and high-quality responses.
-                        </p>
-                        <a href="products/breezy.html" class="btn">Learn More</a>
-                    </div>
-                    <div class="product-item">
-                        <img src="https://placehold.co/300x150/2a2a2a/2a2a2a" alt="Detox" loading="lazy">
+                        <img src="https://placehold.co/300x150/2a2a2a/2a2a2a" style="" alt="Detox" loading="lazy">
                         <h3 class="fade-in">Detox</h3>
                         <p class="fade-in">
                             Personalized AI-crafted detox plans tailored to your unique health goals, empowering you to live your best life.
@@ -200,22 +219,6 @@
                         <h3 class="fade-in">Tower of Bedrock</h3>
                         <p class="fade-in">
                             A game with over 1,000 daily players, fully coded by us and enhanced by a custom-coded website for immersive engagement.
-                        </p>
-                        <a href="products/tower-of-bedrock.html" class="btn">Learn More</a>
-                    </div>
-                    <div class="client-item">
-                        <img src="https://placehold.co/300x150/2a2a2a/2a2a2a" alt="Tower of Bedrock" loading="lazy">
-                        <h3 class="fade-in">TBD</h3>
-                        <p class="fade-in">
-                           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        </p>
-                        <a href="products/tower-of-bedrock.html" class="btn">Learn More</a>
-                    </div>
-                    <div class="client-item">
-                        <img src="https://placehold.co/300x150/2a2a2a/2a2a2a" alt="Tower of Bedrock" loading="lazy">
-                        <h3 class="fade-in">TBD</h3>
-                        <p class="fade-in">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </p>
                         <a href="products/tower-of-bedrock.html" class="btn">Learn More</a>
                     </div>

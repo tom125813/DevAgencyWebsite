@@ -1932,3 +1932,154 @@ section {
         right: 10px;
     }
 }
+.breezy-icon-container {
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    height: 150px; /* Match the height of other product images */
+    padding: 0 20px; /* Add padding on the left and right sides */
+    background: #2a2a2a; /* Match the dark mode placeholder background */
+}
+
+.light-theme .breezy-icon-container {
+    background: #f5f5f5; /* Match the light mode .product-item background */
+}
+
+.breezy-icon-container img {
+    width: 80%; /* Keep the image smaller */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 100%; /* Ensure it doesn't exceed the container height */
+    filter: hue-rotate(300deg) saturate(4); /* Your color adjustment for dark mode */
+}
+
+.light-theme .breezy-icon-container img {
+    filter: none; /* Keep the original blue in light mode */
+}
+.light-theme .product-item img,
+.light-theme .client-item img {
+    filter: none; /* Remove brightness adjustment in light mode */
+}
+/* Add this rule to disable transitions when no-transition class is applied */
+.no-transition {
+    transition: none !important;
+}
+
+/* Example: Navbar active link */
+.nav-links a.active {
+    color: var(--primary-color);
+    /*border-bottom: 2px solid var(--primary-color);*/
+    transition: color 0.3s ease, border-bottom-color 0.3s ease; /* Existing transition */
+}
+/* Navbar Active Link */
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Keep transitions for non-theme properties */
+}
+
+.nav-links a:hover {
+    transform: translateY(-2px);
+    opacity: 0.8;
+}
+
+.nav-links a.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    transition: none; /* Remove transition for color and border-bottom-color */
+}
+
+/* Learn More Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Keep transitions for non-theme properties */
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+    opacity: 0.9;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Ensure hover transitions are preserved */
+}
+
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease; /* Keep transitions for non-theme properties */
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+}
+/* Learn More Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-color);
+    color: #1a1a1a; /* Fixed text color, not white, consistent in both themes */
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Only animate transform and opacity */
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+    color: #1a1a1a; /* Keep text color consistent on hover */
+    border-color: var(--secondary-color);
+    transform: translateY(-2px);
+    opacity: 0.9;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Ensure hover transitions for transform and opacity */
+}
+/* Learn More Buttons */
+.btn {
+    display: inline-block;
+    padding: 10px 20px; /* Matches your original padding */
+    background: var(--primary-color); /* #00ff88 in dark mode, #007bff in light mode */
+    color: var(--bg-color); /* #0a0a0a in dark mode, #f5f5f5 in light mode */
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 auto 20px;
+    width: 140px;
+    border: 1px solid var(--primary-color); /* Add border to match background */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Only animate transform and opacity */
+}
+
+.btn:hover {
+    background: var(--highlight-color); /* #33ff99 in dark mode (lighter green), #0056b3 in light mode (darker blue) */
+    color: var(--bg-color); /* Maintain text color on hover */
+    border-color: var(--highlight-color); /* Match border to hover background */
+    transform: translateY(-2px);
+    opacity: 0.9;
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Ensure hover transitions for transform and opacity */
+}

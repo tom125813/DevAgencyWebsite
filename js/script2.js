@@ -1,4 +1,42 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Cookie Handling Functions
+    const setCookie = (name, value, days) => {
+        let expires = '';
+        if (days) {
+            const date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = '; expires=' + date.toUTCString();
+        }
+        document.cookie = name + '=' + (value || '') + expires + '; path=/';
+    };
+
+    const getCookie = (name) => {
+        const nameEQ = name + '=';
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i];
+            while (cookie.charAt(0) === ' ') {
+                cookie = cookie.substring(1, cookie.length);
+            }
+            if (cookie.indexOf(nameEQ) === 0) {
+                return cookie.substring(nameEQ.length, cookie.length);
+            }
+        }
+        return null;
+    };
+
+    // Function to Update Placeholder Images
+    const updatePlaceholders = (isLightTheme) => {
+        const placeholders = document.querySelectorAll('.product-item img:not(.breezy-icon-container img), .client-item img');
+        placeholders.forEach(img => {
+            if (isLightTheme) {
+                img.src = img.src.replace('2a2a2a/2a2a2a', 'f5f5f5/f5f5f5');
+            } else {
+                img.src = img.src.replace('f5f5f5/f5f5f5', '2a2a2a/2a2a2a');
+            }
+        });
+    };
+
     // Preloader
     const preloader = document.querySelector('.preloader');
     const hidePreloader = () => {
@@ -7,6 +45,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('load', hidePreloader);
     setTimeout(hidePreloader, 3000);
+
+    // Restore Theme from Cookie on Page Load
+    const savedTheme = getCookie('theme');
+    const isLightThemeInitially = savedTheme === 'light';
+    if (isLightThemeInitially) {
+        document.documentElement.classList.add('light-theme');
+    }
+    const logoImg = document.querySelector('.logo-img');
+    logoImg.src = isLightThemeInitially ? 'images/logo.ico' : 'images/logo.png';
+    updatePlaceholders(isLightThemeInitially);
 
     // Boolean to disable arrows on mobile
     const disableArrowsOnMobile = true;
@@ -228,22 +276,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Theme Toggle
-    const themeToggle = document.querySelector('.theme-toggle');
-    const logoImg = document.querySelector('.logo-img');
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('light-theme');
-        const isLightTheme = document.body.classList.contains('light-theme');
-        localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
-        logoImg.src = isLightTheme ? 'images/logo.ico' : 'images/logo.png';
-        const placeholders = document.querySelectorAll('.product-item img, .client-item img');
-        placeholders.forEach(img => {
-            if (isLightTheme) {
-                img.src = img.src.replace('2a2a2a/2a2a2a', 'd0d0d0/d0d0d0');
-            } else {
-                img.src = img.src.replace('d0d0d0/d0d0d0', '2a2a2a/2a2a2a');
-            }
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            // Select elements that should not animate during theme toggle
+            const activeNavLink = document.querySelector('.nav-links a.active');
+            const backToTop = document.querySelector('.back-to-top');
+            const learnMoreButtons = document.querySelectorAll('.btn');
+
+            // Combine all elements into a single NodeList for easier handling
+            const elementsToDisableTransition = [
+                activeNavLink,
+                backToTop,
+                ...learnMoreButtons
+            ].filter(el => el); // Filter out null/undefined elements
+
+            // Apply no-transition class to disable transitions
+            elementsToDisableTransition.forEach(el => el.classList.add('no-transition'));
+
+            // Toggle the theme
+            const isLightTheme = !document.documentElement.classList.contains('light-theme');
+            document.documentElement.classList.toggle('light-theme', isLightTheme);
+            setCookie('theme', isLightTheme ? 'light' : 'dark', 30); // Save theme for 30 days
+            logoImg.src = isLightTheme ? 'images/logo.ico' : 'images/logo.png';
+            updatePlaceholders(isLightTheme);
+
+            // Remove no-transition class after a short delay to restore normal transitions
+            setTimeout(() => {
+                elementsToDisableTransition.forEach(el => el.classList.remove('no-transition'));
+            }, 0); // Delay of 0ms ensures the theme change is applied instantly
         });
-    });
 
     // Active Nav Link on Scroll
     const sections = document.querySelectorAll('section');
