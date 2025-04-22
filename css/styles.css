@@ -1950,9 +1950,49 @@ section {
     width: 80%; /* Keep the image smaller */
     height: auto; /* Maintain aspect ratio */
     max-height: 100%; /* Ensure it doesn't exceed the container height */
-    filter: hue-rotate(300deg) saturate(4); /* Your color adjustment for dark mode */
+    filter: /*hue-rotate(300deg)*/ saturate(15); /* Your color adjustment for dark mode */
 }
 
+.icon-container {
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    height: 150px; /* Match the height of other product images */
+    padding: 0 20px; /* Add padding on the left and right sides */
+    background: #2a2a2a; /* Match the dark mode placeholder background */
+}
+
+.light-theme .icon-container {
+    background: #f5f5f5; /* Match the light mode .product-item background */
+}
+
+.icon-container img {
+    width: 100%; /* Keep the image smaller */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 100%; /* Ensure it doesn't exceed the container height */
+}
+
+.icon-container-full {
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    align-items: center; /* Center the image vertically */
+    height: 150px; /* Fixed height as specified */
+    padding: 0 20px; /* Add padding on the left and right sides */
+    background: #2a2a2a; /* Match the dark mode placeholder background */
+    width: 100%; /* Ensure the container spans the full width */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.light-theme .icon-container-full {
+    background: #f5f5f5; /* Match the light mode .product-item background */
+}
+
+.icon-container-full img {
+    width: 100%; /* Make the image span the full width of the container */
+    height: 150px; /* Match the container's fixed height */
+    object-fit: cover; /* Ensure the image covers the area without stretching */
+    max-height: 150px; /* Prevent the image from exceeding the container height */
+}
 .light-theme .breezy-icon-container img {
     filter: none; /* Keep the original blue in light mode */
 }
@@ -2061,6 +2101,7 @@ section {
     opacity: 0.9;
     transition: transform 0.3s ease, opacity 0.3s ease; /* Ensure hover transitions for transform and opacity */
 }
+
 /* Learn More Buttons */
 .btn {
     display: inline-block;
@@ -2083,6 +2124,30 @@ section {
     transform: translateY(-2px);
     opacity: 0.9;
     transition: transform 0.3s ease, opacity 0.3s ease; /* Ensure hover transitions for transform and opacity */
+}
+
+.lightning {
+  background-color: #E54D03;
+  border-color: #E54D03;
+  color: white;
+}
+
+.lightning:hover {
+  background-color: #E54D03 !important;
+  border-color: #E54D03;
+  color: white;
+}
+
+.breezy{
+background: #0195FA;
+color: white;
+border: 1px solid #0195FA; /* Add border to match background */
+}
+
+.breezy:hover {
+background: #0195FA;
+color: white;
+border-color: #0195FA; /* Match border to hover background */
 }
 
 .hero-arrow {
